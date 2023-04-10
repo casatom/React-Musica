@@ -1,0 +1,329 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+
+.holder {
+  display: flex;
+  margin: 0 -15px;
+}
+
+.holder h1 {
+  width: 100px;
+  margin: 0 10px;
+  margin-top: 30px;
+  
+}
+
+
+
+nav ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+nav ul li a:hover {
+  background-color: #555;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+li h3 {
+  margin: 0;
+}
+
+li img {
+  width: 150px;
+  margin-left: 20px;
+}
+
+li p {
+  margin: 0;
+  font-size: 16px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+#generos {
+  background-color: #f8f8f8;
+  padding: 20px;
+}
+
+#generos h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#generos ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#generos li {
+  flex-basis: calc(30% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  display: flex;
+}
+
+#generos img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+#generos h3 {
+  margin-top: 0;
+}
+
+#generos p {
+  margin-bottom: 0;
+}
+
+#lanzamientos {
+  background-color: #fff;
+  padding: 20px;
+}
+
+#lanzamientos h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#lanzamientos ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#lanzamientos li {
+  flex-basis: calc(30% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#lanzamientos li:last-child {
+  margin-right: 0;
+}
+
+#lanzamientos img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#lanzamientos h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+#lanzamientos p {
+  margin: 0;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#lanzamientos .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+#lanzamientos .btn:hover {
+  background-color: #444;
+}
+
+#contacto {
+  background-color: #fff;
+  padding: 20px;
+}
+
+#contacto h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#contacto form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contacto div {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+#contacto label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#contacto input,
+#contacto textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#contacto textarea {
+  height: 150px;
+}
+
+#contacto button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contacto button:hover {
+  background-color: #444;
+}
+
+#artistas-emergentes {
+  background-color: #f5f5f5;
+  margin-right: 0px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+.titulo-artista-emergente {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.artista {
+  width: 350px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.artista img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.artista h3 {
+  font-size: 20px;
+  margin: 10px 20px;
+}
+
+.artista p {
+  margin: 10px 20px;
+}
+
+.artista button {
+  display: block;
+  margin: 10px 20px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.artista button:hover {
+  background-color: #444;
+}
+
+#generos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}

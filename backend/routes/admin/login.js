@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var usuariosModel = require('./../../models/usuariosModel');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -7,6 +8,26 @@ router.get('/', function(req, res, next) {
     layout: 'admin/layout'
   });
 });
+
+router.post('/', async (req,res,next) => {
+    try{
+        var usuario = req.body.username;
+        var contra = req.body.password;
+
+        var data = await usuariosModel.getUserByUsernameAndPassword(usuario,contra);
+
+        if(data != undefined){
+            res.redirect('/admin/novedades')
+        }else{
+            res.render('admin/login',{
+                layout:'admin/layout',
+                error:true
+            })
+        }
+    }catch(error){
+        console.log(error)
+    }
+})
 
 
 

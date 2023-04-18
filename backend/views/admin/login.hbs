@@ -4,5 +4,8 @@
     <input type="text" id="username" name="username" required>
     <label for="password">Contraseña:</label>
     <input type="password" id="password" name="password" required>
+    {{#if error}}
+    <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3">La contraseña no es correcta</div>
+    {{/if}}
     <button type="submit">Ingresar</button>
 </form>

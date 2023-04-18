@@ -11,7 +11,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  height: 110px;
 }
 
 
@@ -326,4 +326,92 @@ footer {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.login-form {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.login-form h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.login-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #337ab7;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.login-form button[type="submit"]:hover {
+  background-color: #286090;
+}
+
+
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 40px;
+}
+
+.admin-btn,
+.user-btn {
+  background-color: #0077b6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: larger;
+}
+
+.user-btn:hover {
+  background-color: #286090;
+}
+
+.admin-btn:hover {
+  background-color: rgb(90, 75, 75);
+}
+
+.admin-btn{
+  background-color: gray;
+}
+
+.parte-izq{
+  display: flex;
+  flex-direction: column;
+  column-gap: 10px;
 }

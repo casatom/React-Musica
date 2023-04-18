@@ -15,7 +15,7 @@ const Header = (props) => {
             <div class="parte-izq">
                 <div class="header-top">
                     <button class="user-btn"><Link to="/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Log In</Link></button>
-                    <button class="admin-btn"><Link to="/loginAdmin" style={{ color: 'inherit', textDecoration: 'inherit' }}>Admin</Link></button>
+                    <button class="admin-btn"><Link to="/admin/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Admin</Link></button>
                 </div>
                 <nav>
                     <ul>

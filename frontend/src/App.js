@@ -29,7 +29,7 @@ function App() {
           <Route path='/nuevosartistas' element={<ArtistasNuevosPage />} />
           <Route path='/contacto' element={<ContactoPage />} />
           <Route path='/login' element={<LoginNormal />} />
-          <Route path='/loginAdmin' element={<LoginAdmin />} />
+          <Route path='/admin/login' element={<LoginAdmin />} />
         </Routes>
       </BrowserRouter>
 

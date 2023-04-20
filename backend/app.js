@@ -9,8 +9,13 @@ var session = require('express-session')
 require('dotenv').config();
 //var pool = require('./models/bd')
 
+var session = require('express-session');
+
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/admin/login')
+var loginAdminRouter = require('./routes/admin/login')
+var adminRouter = require('./routes/admin/home');
+var loginUsersRouter = require('./routes/users/login')
+var usersRouter = require('./routes/users/home')
 
 var app = express();
 
@@ -30,8 +35,55 @@ app.use(session({
   saveUninitialized:true
 }))
 
+securedAdmin = async (req,res,next)=>{
+  try{
+    console.log(req.session.id_usuario);
+    if(req.session.id_usuario){
+      if(req.session.admin){
+        next();
+      }
+      else{
+        res.redirect('/users/home')
+      }
+    }
+    else{
+      res.redirect('/')
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
+securedUsers = async (req,res,next)=>{
+  try{
+    console.log(req.session.id_usuario);
+    if(req.session.id_usuario){
+      if(!req.session.admin){
+        next();
+      }
+      else{
+        res.redirect('/admin/home')
+      }
+    }
+    else{
+      res.redirect('/')
+    }
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+
 app.use('/', indexRouter);
-app.use('/admin/login', loginRouter);
+app.use('/admin/login', loginAdminRouter);
+app.use('/admin/home', securedAdmin , adminRouter);
+
+
+app.use('/users/login', loginUsersRouter);
+app.use('/users/home', securedUsers , usersRouter);
+
+
 
 
 /*app.post('/ingresar', function(req, res, next) {
@@ -41,10 +93,12 @@ app.use('/admin/login', loginRouter);
   res.redirect('/');
 });*/
 
+
+/*
 app.get('/salir',function(req, res) {
   req.session.destroy();
   res.redirect('/');
-});
+});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

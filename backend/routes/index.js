@@ -1,10 +1,14 @@
 var express = require('express');
 var router = express.Router();
+//var usuariosModel = require('./../../models/usuariosModel');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.redirect('admin/login');
-/*
+
+  res.redirect('users/login');
+
+  /*
   var conocido = Boolean(req.session.nombre);
 
   res.render('index',{

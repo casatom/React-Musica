@@ -11,7 +11,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 110px;
+  height: 130px;
 }
 
 
@@ -383,10 +383,18 @@ footer {
   justify-content: flex-end;
   align-items: center;
   height: 40px;
+  
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.header-top .nombre-usuario{
+  font-size: larger;
 }
 
 .admin-btn,
-.user-btn {
+.user-btn,
+.out-btn{
   background-color: #0077b6;
   color: #fff;
   border: none;
@@ -394,8 +402,9 @@ footer {
   padding: 10px 20px;
   margin-left: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
   cursor: pointer;
-  font-size: larger;
+  font-size: large;
 }
 
 .user-btn:hover {
@@ -406,7 +415,12 @@ footer {
   background-color: rgb(90, 75, 75);
 }
 
-.admin-btn{
+.out-btn:hover {
+  background-color: rgb(90, 75, 75);
+}
+
+.admin-btn, 
+.out-btn{
   background-color: gray;
 }
 

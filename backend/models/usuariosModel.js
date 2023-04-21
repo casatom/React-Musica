@@ -4,6 +4,7 @@ var md5 = require('md5')
 async function getUserByUsernameAndPasswordAdmin(user,password){
     try{
         var query = 'select * from usuarios where usuario = ? and password = ? and isAdmin = 1 limit 1';
+        
         var rows = await pool.query(query, [user,md5(password)]);
         return rows[0]; 
     } catch (error) {
@@ -13,7 +14,8 @@ async function getUserByUsernameAndPasswordAdmin(user,password){
 
 async function getUserByUsernameAndPassword(user,password){
     try{
-        var query = 'select * from usuarios where usuario = ? and password = ? and isAdmin= 0 limit 1';
+        var query = 'select * from usuarios where usuario = ? and password = ? and isAdmin = 0 limit 1';
+        
         var rows = await pool.query(query, [user,md5(password)]);
         return rows[0]; 
     } catch (error) {

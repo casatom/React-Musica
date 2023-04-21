@@ -47,7 +47,7 @@ securedAdmin = async (req,res,next)=>{
       }
     }
     else{
-      res.redirect('/')
+      res.redirect('/users/login')
     }
   }
   catch(error){
@@ -67,7 +67,7 @@ securedUsers = async (req,res,next)=>{
       }
     }
     else{
-      res.redirect('/')
+      res.redirect('/users/login')
     }
   }
   catch(error){
@@ -86,19 +86,6 @@ app.use('/users/home', securedUsers , usersRouter);
 
 
 
-/*app.post('/ingresar', function(req, res, next) {
-  if (req.body.nombre){
-      req.session.nombre = req.body.nombre
-  }
-  res.redirect('/');
-});*/
-
-
-/*
-app.get('/salir',function(req, res) {
-  req.session.destroy();
-  res.redirect('/');
-});*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

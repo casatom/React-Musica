@@ -6,6 +6,13 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
+  if(req.session.admin){
+    res.redirect('/admin/home')
+  }
+  else{
+    res.redirect('users/home');  
+  }
+
   res.redirect('users/login');
 
   /*

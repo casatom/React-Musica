@@ -14,10 +14,7 @@ router.post("/", async (req, res, next) => {
     var usuario = req.body.username;
     var contra = req.body.password;
 
-    var data = await usuariosModel.getUserByUsernameAndPassword(
-      usuario,
-      contra
-    );
+    var data = await usuariosModel.getUserByUsernameAndPassword(usuario,contra);
 
     if (data != undefined) {
       req.session.id_usuario = data.id;

@@ -17,6 +17,16 @@ var adminRouter = require('./routes/admin/home');
 var loginUsersRouter = require('./routes/users/login')
 var usersRouter = require('./routes/users/home')
 
+var adminGenerosRouter = require('./routes/admin/generos');
+var adminLanzamientosRouter = require('./routes/admin/lanzamientos');
+var adminArtistasRouter = require('./routes/admin/artistas');
+var adminContactoRouter = require('./routes/admin/contacto');
+
+var usersGenerosRouter = require('./routes/users/generos');
+var usersLanzamientosRouter = require('./routes/users/lanzamientos');
+var usersArtistasRouter = require('./routes/users/artistas');
+var usersContactoRouter = require('./routes/users/contacto');
+
 var app = express();
 
 // view engine setup
@@ -28,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("images"));
 
 app.use(session({
   secret: 'bwST3zw6BP4baHDHtL78',
@@ -75,13 +86,27 @@ securedUsers = async (req,res,next)=>{
   }
 }
 
+app.get("/static", (req, res) => {
+  res.render("static");
+});
+
 app.use('/', indexRouter);
+
+
 app.use('/admin/login', loginAdminRouter);
 app.use('/admin/home', securedAdmin , adminRouter);
+app.use('/admin/lanzamientos', securedAdmin , adminLanzamientosRouter);
+app.use('/admin/generos', securedAdmin , adminGenerosRouter);
+app.use('/admin/artistas', securedAdmin , adminArtistasRouter);
+app.use('/admin/contacto', securedAdmin , adminContactoRouter);
 
 
 app.use('/users/login', loginUsersRouter);
 app.use('/users/home', securedUsers , usersRouter);
+app.use('/users/lanzamientos', securedUsers , usersLanzamientosRouter);
+app.use('/users/generos', securedUsers , usersGenerosRouter);
+app.use('/users/artistas', securedUsers , usersArtistasRouter);
+app.use('/users/contacto', securedUsers , usersContactoRouter);
 
 
 

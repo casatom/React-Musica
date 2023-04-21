@@ -15,33 +15,36 @@
 
   <body>
     <header>
-
-      <div class="holder">
-        <img src="/images/logo.png" width="100" alt="Meta-icon" />
-        <h1>Mesa.com</h1>
-      </div>
+      <a href="/" style="all: unset">
+        <div class="holder">
+          <img src="/images/logo.png" width="100" alt="Meta-icon" />
+          <h1>Mesa.com</h1>
+        </div></a>
       <div class="parte-izq">
 
         {{#if conocido}}
           <div class="header-top">
             <div class="nombre-usuario">Hola {{nombre}}!</div>
-            <a href="/users/login/logout" > <button class="out-btn">Log Out<i class="fa-solid fa-right-from-bracket"></i>
-            </button></a>
+            <a href="/users/login/logout">
+              <button class="out-btn">Log Out<i
+                  class="fa-solid fa-right-from-bracket"
+                ></i>
+              </button></a>
           </div>
           <nav>
             <ul>
-              <li><a href="index.html">Inicio</a></li>
-              <li><a href="generos.html">Géneros</a></li>
-              <li><a href="lanzamientos.html">Nuevos lanzamientos</a></li>
-              <li><a href="nuevosartistas.html">Artistas emergentes</a></li>
-              <li><a href="contacto.html">Contacto</a></li>
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/users/generos">Géneros</a></li>
+              <li><a href="/users/lanzamientos">Nuevos lanzamientos</a></li>
+              <li><a href="/users/artistas">Artistas emergentes</a></li>
+              <li><a href="/users/contacto">Contacto</a></li>
             </ul>
           </nav>
 
         {{else}}
           <div class="header-top">
-            <a href="/users/login"><button class="user-btn">Log In</button></a> 
-            <a href="/admin/login"><button class="admin-btn">Admin</button></a> 
+            <a href="/users/login"><button class="user-btn">Log In</button></a>
+            <a href="/admin/login"><button class="admin-btn">Admin</button></a>
           </div>
         {{/if}}
 

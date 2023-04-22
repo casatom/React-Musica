@@ -21,7 +21,7 @@ async function insertMails(nombre,	texto,	emailEmisor){
   };
 
   try {
-    var query = "insert into artistas set ?";
+    var query = "insert into mails set ?";
 
     await pool.query(query, [obj]);
 

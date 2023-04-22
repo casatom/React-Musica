@@ -10,3 +10,30 @@ async function getAllMails(){
         console.log(error);
     }
 }
+
+//id	nombre	texto	emailEmisor	fechaAlta
+async function insertMails(nombre,	texto,	emailEmisor){
+
+  var obj = {
+    nombre: nombre,
+    texto: texto,
+    emailEmisor: emailEmisor,
+  };
+
+  try {
+    var query = "insert into artistas set ?";
+
+    await pool.query(query, [obj]);
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+
+}
+
+module.exports = {
+    getAllMails,
+    insertMails,
+  };

@@ -12,6 +12,7 @@ require('dotenv').config();
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
+
 var loginAdminRouter = require('./routes/admin/login')
 var adminRouter = require('./routes/admin/home');
 var loginUsersRouter = require('./routes/users/login')
@@ -26,6 +27,8 @@ var usersGenerosRouter = require('./routes/users/generos');
 var usersLanzamientosRouter = require('./routes/users/lanzamientos');
 var usersArtistasRouter = require('./routes/users/artistas');
 var usersContactoRouter = require('./routes/users/contacto');
+
+var artistaModel = require('./models/artistasModel')
 
 var app = express();
 
@@ -107,6 +110,14 @@ app.use('/users/lanzamientos', securedUsers , usersLanzamientosRouter);
 app.use('/users/generos', securedUsers , usersGenerosRouter);
 app.use('/users/artistas', securedUsers , usersArtistasRouter);
 app.use('/users/contacto', securedUsers , usersContactoRouter);
+
+var resultado =  artistaModel.insertArtista('nombrePrueba','descripcionprueba');
+
+console.log('resultado 1 '+resultado)
+
+var resultado2 =  artistaModel.insertArtista('nombrePrueba2','descripcionPrueba2','imagenPrueba.jpg')
+
+console.log('resultado 2 '+resultado2)
 
 
 

@@ -1,12 +1,11 @@
 var pool = require('./bd')
-var md5 = require('md5')
 
 async function getAllLanzamientos(){
     try{
         var query = 'select * from canciones order by fechaAlta desc';
         
         var rows = await pool.query(query);
-        return rows[0]; 
+        return rows; 
     } catch (error) {
         console.log(error);
     }
@@ -17,6 +16,17 @@ async function getTop3Lanzamientos(){
         var query = 'select top 3 * from canciones order by fechaAlta desc';
         
         var rows = await pool.query(query);
+        return rows; 
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getLanzamiento(id){
+    try{
+        var query = 'select * from canciones where id = ? limit 1 order by fechaAlta desc';
+        
+        var rows = await pool.query(query,[id]);
         return rows[0]; 
     } catch (error) {
         console.log(error);
@@ -37,7 +47,7 @@ async function insertLanzamiento(nombre, descripcion, artistaId, generoId, rutaI
     try{
         var query = 'insert into canciones set ?';
         
-        await pool.query(query, [obj,lanzamientoId]);
+        await pool.query(query, [obj]);
         
         return true; 
     } catch (error) {
@@ -74,11 +84,12 @@ async function deleteLanzamiento(lanzamientoId){
     try{
         var query = 'delete from canciones where id = ?';
         
-        var rows = await pool.query(query, [lanzamientoId]);
-        return rows[0]; 
+        await pool.query(query, [lanzamientoId]);
+        return true; 
     } catch (error) {
         console.log(error);
+        return false;
     }
 }
 
-module.exports = {getAllLanzamientos,getTop3Lanzamientos,insertLanzamiento,deleteLanzamiento,updateLanzamiento}
+module.exports = {getAllLanzamientos,getLanzamiento,getTop3Lanzamientos,insertLanzamiento,deleteLanzamiento,updateLanzamiento}

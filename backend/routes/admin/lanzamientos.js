@@ -1,11 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var lanzamientoModel = require('./../../models/lanzamientos');
 
 //TODO modificar la vista para poner botones de alta, baja y modificacion
-router.get('/', function(req, res, next) {
+router.get('/', async(req, res, next) => {
+
+  var resultado = await lanzamientoModel.getAllLanzamientos();
+
+
   res.render('admin/lanzamientos',{
     layout: 'admin/layout',
     nombre: req.session.nombre,
+    lanzamientos: resultado,
     conocido: 1
   });
 });

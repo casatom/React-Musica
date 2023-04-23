@@ -2,7 +2,7 @@ var pool = require('./bd')
 
 async function getAllLanzamientos(){
     try{
-        var query = 'select c.* , a.nombre as \'artistaNombre\' , a.id as \'artistaId\' , g.nombre as \'generoNombre\' , g.id as \'generoId\' from canciones c inner join artistas a on c.artistaId= a.id inner join genero g on c.genereoId = g.id  order by fechaAlta desc';
+        var query = 'select c.* , a.nombre as \'artistaNombre\'  , g.nombre as \'generoNombre\'  from canciones c inner join artistas a on c.artistaId= a.id inner join generos g on c.generoId = g.id  order by fechaAlta desc';
         
         var rows = await pool.query(query);
         return rows; 
@@ -13,7 +13,7 @@ async function getAllLanzamientos(){
 
 async function getTop3Lanzamientos(){
     try{
-        var query = 'select top 3 c.* , a.nombre as \'artistaNombre\' , a.id as \'artistaId\' , g.nombre as \'generoNombre\' , g.id as \'generoId\' from canciones c inner join artistas a on c.artistaId= a.id inner join genero g on c.genereoId = g.id order by fechaAlta desc';
+        var query = 'select c.* , a.nombre as \'artistaNombre\'  , g.nombre as \'generoNombre\'  from canciones c inner join artistas a on c.artistaId= a.id inner join generos g on c.generoId = g.id order by fechaAlta desc limit 3';
         
         var rows = await pool.query(query);
         return rows; 
@@ -24,7 +24,7 @@ async function getTop3Lanzamientos(){
 
 async function getLanzamiento(id){
     try{
-        var query = 'select c.* , a.nombre as \'artistaNombre\' , a.id as \'artistaId\' , g.nombre as \'generoNombre\' , g.id as \'generoId\' from canciones c inner join artistas a on c.artistaId= a.id inner join genero g on c.genereoId = g.id where id = ? limit 1 ';
+        var query = 'select c.* , a.nombre as \'artistaNombre\'  , g.nombre as \'generoNombre\'  from canciones c inner join artistas a on c.artistaId= a.id inner join generos g on c.generoId = g.id where id = ? limit 1 ';
         
         var rows = await pool.query(query,[id]);
         return rows[0]; 

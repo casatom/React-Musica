@@ -13,7 +13,7 @@ async function getAllArtistas() {
 
 async function getTop3Artistas() {
   try {
-    var query = "select top 3 * from artistas order by fechaAlta desc";
+    var query = "select * from artistas order by fechaAlta desc limit 3";
 
     var rows = await pool.query(query);
     return rows;

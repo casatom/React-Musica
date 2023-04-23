@@ -24,7 +24,7 @@ async function getTop3Lanzamientos(){
 
 async function getLanzamiento(id){
     try{
-        var query = 'select * from canciones where id = ? limit 1 order by fechaAlta desc';
+        var query = 'select * from canciones where id = ? limit 1 ';
         
         var rows = await pool.query(query,[id]);
         return rows[0]; 

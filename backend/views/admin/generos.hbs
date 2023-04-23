@@ -1,5 +1,24 @@
 <section id="generos">
   <h2>Géneros</h2>
+  {{#if errorEdicion}}
+    <div class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3">
+      Hay un problema con la Edicion
+    </div>
+  {{/if}}
+
+  {{#if errorCreacion}}
+    <div class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3">
+      Hay un problema con la Creacion
+    </div>
+  {{/if}}
+
+  {{#if errorEliminar}}
+    <div class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3">
+      Hay un problema con la Elminacion
+    </div>
+  {{/if}}
+
+  <a href="/admin/generos/alta"><button class="btn">Crear genero</button></a>
   <ul>
     <li>
       <img src="/images/generos/rock.png" alt="Rock" />
@@ -83,5 +102,35 @@
         </p>
       </div>
     </li>
+
+    {{#each generos}}
+      <li>
+        <img
+          src="/images/generos/{{this.rutaImagen}}"
+          alt="genero {{this.nombre}}"
+        />
+        <div>
+          <h3>{{this.nombre}}</h3>
+          <p>
+            {{this.descripcion}}
+          </p>
+        </div>
+
+        <form action="/admin/generos/editable" method="post" style="all:unset">
+          <button type="submit" class="btn" name="generoId"  value="{{this.id}}">Editar</button>
+        </form>
+
+        <form action="/admin/generos/borrar" method="post" style="all:unset">
+          <button type="submit" class="btn" name="generoId"  value="{{this.id}}">Borrar</button>
+        </form>
+
+        <!--
+        <a href="/admin/generos/editable"><button
+            class="btn"
+          >Editar</button></a>
+        <a href="/admin/generos/borrar"><button class="btn">Borrar</button></a>
+        -->
+      </li>
+    {{/each}}
   </ul>
 </section>

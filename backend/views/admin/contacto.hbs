@@ -1,5 +1,8 @@
 <section id="contacto">
-  <h2>Contacto</h2>
+  <h2>Contactos</h2>
+
+  <!-- 
+
   <form>
     <div>
       <label for="nombre">Nombre:</label>
@@ -15,4 +18,31 @@
     </div>
     <button type="submit" class="btn">Enviar</button>
   </form>
+-->
+  <table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Mensaje</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- nombre: nombre,
+    texto: texto,
+    emailEmisor: emailEmisor, -->
+      {{#each mails}}
+        <tr>
+          <td>{{@index}}</td>
+          <td>{{this.nombre}}</td>
+          <td>{{this.emailEmisor}}</td>
+          <td>{{this.texto}}</td>
+        </tr>
+      {{/each}}
+
+    </tbody>
+  </table>
 </section>

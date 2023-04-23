@@ -76,12 +76,24 @@
       <div>
         <h3>Metal</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni aliquid
-          expedita mollitia qui debitis accusamus voluptatibus autem quibusdam
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni aliquid expedita mollitia qui debitis accusamus voluptatibus autem quibusdam
           non. Nisi ipsam illum odit reiciendis magnam fuga consequuntur.
           Magnam, quia corporis!
         </p>
       </div>
     </li>
+
+<!--nombre	descripcion	fechaAlta	rutaImagen -->
+    {{#each generos}}
+    <li>
+      <img src="/images/generos/{{this.rutaImagen}}" alt="genero {{this.nombre}}" />
+      <div>
+        <h3>{{this.nombre}}</h3>
+        <p>
+          {{this.descripcion}}
+        </p>
+      </div>
+    </li>
+    {{/each}}
   </ul>
 </section>

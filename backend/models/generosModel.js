@@ -23,7 +23,7 @@ async function getAllGeneros() {
 
 async function getGenero(id){
     try{
-        var query = 'select * from generos where id = ? limit 1 order by fechaAlta desc';
+        var query = 'select * from generos where id = ? limit 1 ';
         
         var rows = await pool.query(query,[id]);
         return rows[0]; 

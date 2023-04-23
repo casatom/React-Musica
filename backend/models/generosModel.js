@@ -1,11 +1,3 @@
-//TODO get all
-
-//TODO update
-
-//TODO insert
-
-//TODO delete
-
 //id,	nombre,	descripcion,	fechaAlta,	rutaImagen	
 
 var pool = require("./bd");
@@ -32,7 +24,6 @@ async function getGenero(id){
     }
 }
 
-//TODO insert (PROBAR)
 async function insertGenero(
     nombre,	descripcion,			
   rutaImagen = "rock.jpg"
@@ -55,16 +46,16 @@ async function insertGenero(
   }
 }
 
-//TODO update (PROBAR)
-async function updateGenero(
-    generoId,	nombre,	descripcion,	
-  rutaImagen = "rock.jpg"
-) {
+async function updateGenero(generoId,	nombre,	descripcion,rutaImagen = "rock.jpg") {
+
   var obj = {
     nombre: nombre,
     descripcion: descripcion,
     rutaImagen: rutaImagen,
   };
+
+  console.log(obj)
+  console.log("ID: " + generoId);
 
   try {
     var query = "update generos set ? where id=?";
@@ -77,7 +68,6 @@ async function updateGenero(
   }
 }
 
-//TODO delete (PROBAR)
 async function deleteGenero(generoId) {
   try {
     var query = "delete from generos where id = ?";

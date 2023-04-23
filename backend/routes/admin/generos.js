@@ -105,6 +105,11 @@ router.post("/editar", async (req, res, next) => {
   var descripcion = req.body.descripcion;
   var rutaImagen = req.body.ruta_imagen;
 
+  console.log("id "+id)
+  console.log("nombre "+nombre)
+  console.log("descripcion "+descripcion)
+  console.log("rutaImagen "+rutaImagen)
+
   /**
    * 
    * generoId,	nombre,	descripcion,	

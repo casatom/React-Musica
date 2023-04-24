@@ -14,7 +14,10 @@
   </div>
   <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>
-    <input class="form-control" type="file" name="ruta_imagen" value="{{genero.rutaImagen}}" />
+    <input class="form-control" type="file" name="ruta_imagen" value="{{genero.rutaImagen}}" 
+    id="imagen"  onchange="previewImage();" accept="image/*" />
+    <br><br>
+    <img id="preview">
   </div>
   <button type="submit" class="btn btn-primary" name="generoId" value="{{genero.id}}">Editar</button>
   {{#if errorEdicion}}

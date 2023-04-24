@@ -1,6 +1,7 @@
 <h2 class="titulo-artista-emergente">Artistas Emergentes</h2>
 <section id="artistas-emergentes">
 
+
   {{#each artistas}}
     <div class="artista">
       <img src="/images/artista/{{this.rutaImagen}}" alt="Artista {{this.nombre}}" />
@@ -8,5 +9,4 @@
       <p>{{this.descripcion}}</p>
     </div>
   {{/each}}
-
 </section>

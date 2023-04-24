@@ -46,7 +46,10 @@
 
   <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>
-    <input class="form-control" type="file" name="ruta_imagen" />
+    <input class="form-control" type="file" name="ruta_imagen" 
+    id="imagen"  onchange="previewImage();" accept="image/*" />
+    <br><br>
+    <img id="preview">
   </div>
   <button type="submit" class="btn btn-primary">Agregar</button>
   {{#if errorCreacion}}

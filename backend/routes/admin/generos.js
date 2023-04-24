@@ -123,11 +123,11 @@ router.post("/editar", async (req, res, next) => {
     res.redirect("/admin/generos");
   }
   else{
-    res.render("/admin/editarGenero", {
+    res.render("admin/generos", {
       layout: "admin/layout",
-      nombre: req.session.nombre,
+      generos: await generosModel.getAllGeneros(),
       conocido: 1,
-      errorEdicion:1
+      errorEdicion: 1,
     });
   }  
 });

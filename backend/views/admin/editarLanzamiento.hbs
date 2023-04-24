@@ -60,7 +60,9 @@
       type="file"
       name="ruta_imagen"
       value="{{lanzamiento.rutaImagen}}"
-    />
+      id="imagen"  onchange="previewImage();" accept="image/*" />
+    <br><br>
+    <img id="preview">
   </div>
   <button
     type="submit"

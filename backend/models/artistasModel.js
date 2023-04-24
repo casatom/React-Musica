@@ -58,7 +58,7 @@ async function insertArtista(
 async function updateArtista(
   artistaId,
   nombre,	descripcion,	
-  rutaImagen = "artista1.jpg"
+  rutaImagen 
 ) {
   var obj = {
     nombre: nombre,
@@ -67,7 +67,7 @@ async function updateArtista(
   };
 
   try {
-    var query = "update canciones set ? where id=?";
+    var query = "update artistas set ? where id=?";
 
     await pool.query(query, [obj, artistaId]);
     return true;
@@ -79,7 +79,7 @@ async function updateArtista(
 
 async function deleteArtista(artistaId) {
   try {
-    var query = "delete from canciones where id = ?";
+    var query = "delete from artistas where id = ?";
 
     await pool.query(query, [artistaId]);
     return true;

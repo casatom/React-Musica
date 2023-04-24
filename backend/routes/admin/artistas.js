@@ -1,19 +1,18 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var artistasModel = require('./../../models/artistasModel')
+var artistasModel = require("./../../models/artistasModel");
 
 //TODO modificar la ruta de imagen antes de agregar, editar y despues de buscarla(usar una funcion para agregar la ruta)
 
 //TODO modificar la vista para poner botones de alta, baja y modificacion
-router.get('/', async(req, res, next) => {
-
+router.get("/", async (req, res, next) => {
   var resultados = await artistasModel.getAllArtistas();
 
-  res.render('admin/artistas',{
-    layout: 'admin/layout',
+  res.render("admin/artistas", {
+    layout: "admin/layout",
     artistas: resultados,
     nombre: req.session.nombre,
-    conocido: 1
+    conocido: 1,
   });
 });
 
@@ -32,7 +31,6 @@ router.get("/alta", function (req, res, next) {
   });
 });
 
-
 router.post("/alta", async (req, res, next) => {
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
@@ -42,28 +40,25 @@ router.post("/alta", async (req, res, next) => {
 
   console.log("altaa---------------- ");
 
-  console.log("nombre "+nombre);
-  console.log("descripcion "+descripcion);
-  console.log("ruta "+rutaImagen);
-  var resultado;
+  console.log("nombre " + nombre);
+  console.log("descripcion " + descripcion);
+  console.log("ruta " + rutaImagen);
+  var resultado = false;
 
-  if(nombre!=undefined && descripcion!=undefined && nombre!=undefined ){
-    resultado = await artistasModel.insertArtista(
-      nombre,
-      descripcion,
-      rutaImagen
-    );
-  }
-  else{
-    resultado = false;
+  if (nombre && descripcion && rutaImagen) {
+    if (nombre != undefined && descripcion != undefined && rutaImagen != undefined) {
+      resultado = await artistasModel.insertArtista(
+        nombre,
+        descripcion,
+        rutaImagen
+      );
+    }
   }
 
-  console.log("resultado : "+resultado)
+  console.log("resultado : " + resultado);
 
   if (resultado) {
-    
     res.redirect("/admin/artistas");
-
   } else {
     res.render("admin/crearArtista", {
       layout: "admin/layout",
@@ -80,35 +75,40 @@ router.post("/editable", async (req, res, next) => {
 
   //guardar imagen en la ruta correspondiente
 
+  console.log("editandoooo.......");
+
+  console.log("id a editar: " + id);
+
   var resultado = await artistasModel.getArtista(id);
 
   if (resultado) {
     res.render("admin/editarArtista", {
       layout: "admin/layout",
-      genero: resultado,
+      artista: resultado,
       conocido: 1,
     });
   } else {
-    res.render("admin/editarArtista", {
+    res.render("admin/artistas", {
       layout: "admin/layout",
-      nombre: req.session.nombre,
+      artistas: await artistasModel.getAllArtistas(),
       conocido: 1,
-      errorEdicion: 1
+      errorEdicion: 1,
     });
   }
 });
 
 router.post("/editar", async (req, res, next) => {
-  
-  var id = req.body.artistaId; 
+  var id = req.body.artistaId;
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
   var rutaImagen = req.body.ruta_imagen;
 
-  console.log("id "+id)
-  console.log("nombre "+nombre)
-  console.log("descripcion "+descripcion)
-  console.log("rutaImagen "+rutaImagen)
+  console.log("EDITE ESTO..........")
+
+  console.log("id " + id);
+  console.log("nombre " + nombre);
+  console.log("descripcion " + descripcion);
+  console.log("rutaImagen " + rutaImagen);
 
   /**
    * 
@@ -116,43 +116,39 @@ router.post("/editar", async (req, res, next) => {
   rutaImagen = "rock.jpg"
    */
 
-  var resultado = await artistasModel.updateArtista(id,nombre,descripcion,rutaImagen);
+  
+  resultado = await artistasModel.updateArtista(id,nombre,descripcion,rutaImagen);
 
-
-  if(resultado){
+  if (resultado) {
     res.redirect("/admin/artistas");
-  }
-  else{
-    res.render("/admin/artistas", {
+  } else {
+    res.render("admin/artistas", {
       layout: "admin/layout",
       artistas: await artistasModel.getAllArtistas(),
-      nombre: req.session.nombre,
       conocido: 1,
-      errorEdicion:1
+      errorEdicion: 1,
     });
-  }  
+  }
 });
 
 //eliminar
 router.post("/borrar", async (req, res, next) => {
-
   var id = req.body.artistaId;
 
   console.log(id);
 
   var resultado = await artistasModel.deleteArtista(id);
 
-
   console.log(resultado);
 
   if (resultado) {
-      res.redirect("/admin/artistas");
+    res.redirect("/admin/artistas");
   } else {
-    res.render("/admin/artistas", {
+    res.render("admin/artistas", {
       layout: "admin/layout",
-      artistas:await artistasModel.getAllArtistas(),
+      artistas: await artistasModel.getAllArtistas(),
       conocido: 1,
-      errorEdicion:1
+      errorEdicion: 1,
     });
   }
 });

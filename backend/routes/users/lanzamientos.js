@@ -6,6 +6,8 @@ router.get('/', async(req, res, next) => {
 
   var resultado = await lanzamientoModel.getAllLanzamientos();
 
+  console.log(resultado)
+
   res.render('users/lanzamientos',{
     layout: 'users/layout',
     nombre: req.session.nombre,

@@ -86,6 +86,7 @@ router.post("/editable", async (req, res, next) => {
     res.render("admin/editarGenero", {
       layout: "admin/layout",
       genero: resultado,
+      nombre: req.session.nombre,
       conocido: 1,
     });
   } else {
@@ -126,6 +127,7 @@ router.post("/editar", async (req, res, next) => {
     res.render("admin/generos", {
       layout: "admin/layout",
       generos: await generosModel.getAllGeneros(),
+      nombre: req.session.nombre,
       conocido: 1,
       errorEdicion: 1,
     });
@@ -150,6 +152,7 @@ router.post("/borrar", async (req, res, next) => {
     res.render("/admin/generos", {
       layout: "admin/layout",
       generos:req.body.generos,
+      nombre: req.session.nombre,
       conocido: 1,
       errorEdicion:1
     });

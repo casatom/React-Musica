@@ -172,6 +172,7 @@ router.post("/borrar", async (req, res, next) => {
     res.render("/admin/lanzamientos", {
       layout: "admin/layout",
       lanzamientos:req.body.lanzamientos,
+      nombre: req.session.nombre,
       conocido: 1,
       errorEdicion:1
     });

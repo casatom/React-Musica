@@ -1,4 +1,4 @@
-<form action="/admin/artistas/alta" method="post">
+<form action="/admin/artistas/alta"  method="post"  enctype="multipart/form-data">
 
   <!-- var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
@@ -14,8 +14,11 @@
   </div>
   <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>
-    <input class="form-control" type="file" id="imagen" name="ruta_imagen" onchange="previewImage();"/>
+    <input class="form-control" type="file" id="imagen" name="rutaImagen" onchange="previewImage();"
+    accept="image/*"/>
     <br><br>
+    <br><br>
+    <h2>Previsualizacion...</h2>
     <img id="preview">
   </div>
   {{#if errorCreacion}}

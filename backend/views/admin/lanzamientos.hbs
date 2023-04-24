@@ -26,7 +26,7 @@
   {{/if}}
 
   <a href="/admin/lanzamientos/alta"><button class="btn btn-outline-primary">Crear
-        genero</button></a>
+        Lanzamiento</button></a>
 
   <ul>
     {{#each lanzamientos}}
@@ -44,30 +44,24 @@
 
         <a href="#" class="btn-escuchar">Escuchar</a>
 
-        <form action="/admin/generos/editable" method="post" style="all:unset">
+        <form action="/admin/lanzamientos/editable" method="post" style="all:unset">
           <button
             type="submit"
             class="btn btn-outline-success"
-            name="artistaId"
+            name="lanzamientoId"
             value="{{this.id}}"
           >Editar</button>
         </form>
 
-        <form action="/admin/generos/borrar" method="post" style="all:unset">
+        <form action="/admin/lanzamientos/borrar" method="post" style="all:unset">
           <button
             type="submit"
             class="btn btn-outline-danger"
-            name="artistaId"
+            name="lanzamientoId"
             value="{{this.id}}"
           >Borrar</button>
         </form>
 
-        <!--
-        <a href="/admin/generos/editable"><button
-            class="btn"
-          >Editar</button></a>
-        <a href="/admin/generos/borrar"><button class="btn">Borrar</button></a>
-        -->
       </li>
     {{/each}}
   </ul>

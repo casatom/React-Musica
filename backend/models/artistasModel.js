@@ -33,7 +33,6 @@ async function getArtista(id){
     }
 }
 
-//TODO insert (PROBAR)
 async function insertArtista(
   nombre,	descripcion,	
   rutaImagen = "artista1.jpg"
@@ -56,7 +55,6 @@ async function insertArtista(
   }
 }
 
-//TODO update (PROBAR)
 async function updateArtista(
   artistaId,
   nombre,	descripcion,	
@@ -79,7 +77,6 @@ async function updateArtista(
   }
 }
 
-//TODO delete (PROBAR)
 async function deleteArtista(artistaId) {
   try {
     var query = "delete from canciones where id = ?";

@@ -1,34 +1,56 @@
 <h2 class="titulo-artista-emergente">Artistas Emergentes</h2>
 <section id="artistas-emergentes">
 
-  <div class="artista">
-    <img src="/images/artista/artista3.png" alt="Artista 1" />
-    <h3>Nombre del Artista 1</h3>
-    <p>Descripción del Artista 1</p>
-    <button class="btn">Ver más</button>
-  </div>
-  <div class="artista">
-    <img src="/images/artista/artista2.png" alt="Artista 2" />
-    <h3>Nombre del Artista 2</h3>
-    <p>Descripción del Artista 2</p>
-    <button class="btn">Ver más</button>
-  </div>
-  <div class="artista">
-    <img src="/images/artista/artista4.png" alt="Artista 3" />
-    <h3>Nombre del Artista 3</h3>
-    <p>Descripción del Artista 3</p>
-    <button class="btn">Ver más</button>
-  </div>
-  <div class="artista">
-    <img src="/images/artista/artista4.png" alt="Artista 3" />
-    <h3>Nombre del Artista 3</h3>
-    <p>Descripción del Artista 3</p>
-    <button class="btn">Ver más</button>
-  </div>
-  <div class="artista">
-    <img src="/images/artista/artista4.png" alt="Artista 3" />
-    <h3>Nombre del Artista 3</h3>
-    <p>Descripción del Artista 3</p>
-    <button class="btn">Ver más</button>
-  </div>
+  {{#if errorEdicion}}
+    <div
+      class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3"
+    >
+      Hay un problema con la Edicion
+    </div>
+  {{/if}}
+
+  {{#if errorCreacion}}
+    <div
+      class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3"
+    >
+      Hay un problema con la Creacion
+    </div>
+  {{/if}}
+
+  {{#if errorEliminar}}
+    <div
+      class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3"
+    >
+      Hay un problema con la Elminacion
+    </div>
+  {{/if}}
+
+  <a href="/admin/artistas/alta"><button class="btn btn-outline-primary">Crear
+        Artista</button></a>
+
+  {{#each artistas}}
+    <div class="artista">
+      <img src="/images/artista/{{this.rutaImagen}}" alt="Artista {{this.nombre}}" />
+      <h3>{{this.nombre}}</h3>
+      <p>{{this.descripcion}}</p>
+
+      <form action="/admin/artistas/editable" method="post" style="all:unset">
+          <button
+            type="submit"
+            class="btn btn-outline-success"
+            name="artistaId"
+            value="{{this.id}}"
+          >Editar</button>
+        </form>
+
+        <form action="/admin/artistas/borrar" method="post" style="all:unset">
+          <button
+            type="submit"
+            class="btn btn-outline-danger"
+            name="artistaId"
+            value="{{this.id}}"
+          >Borrar</button>
+        </form>
+    </div>
+  {{/each}}
 </section>

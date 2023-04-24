@@ -1,0 +1,25 @@
+<form action="/admin/artistas/alta" method="post">
+
+  <!-- var nombre = req.body.nombre;
+  var descripcion = req.body.descripcion;
+  var rutaImagen = req.body.rutaImagen;
+  -->
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" class="form-control" name="nombre" />
+  </div>
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripcion</label>
+    <input type="text" class="form-control" name="descripcion" />
+  </div>
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Cargar imagen...</label>
+    <input class="form-control" type="file" name="ruta_imagen" />
+  </div>
+  <button type="submit" class="btn btn-primary">Agregar</button>
+  {{#if errorCreacion}}
+    <div
+      class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3"
+    >Hubo un error en la creacion</div>
+  {{/if}}
+</form>

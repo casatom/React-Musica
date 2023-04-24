@@ -24,7 +24,7 @@ async function getTop3Lanzamientos(){
 
 async function getLanzamiento(id){
     try{
-        var query = 'select c.* , a.nombre as \'artistaNombre\'  , g.nombre as \'generoNombre\'  from canciones c inner join artistas a on c.artistaId= a.id inner join generos g on c.generoId = g.id where id = ? limit 1 ';
+        var query = 'select c.* , a.nombre as \'artistaNombre\'  , g.nombre as \'generoNombre\'  from canciones c inner join artistas a on c.artistaId= a.id inner join generos g on c.generoId = g.id where c.id = ? limit 1 ';
         
         var rows = await pool.query(query,[id]);
         return rows[0]; 
@@ -33,7 +33,7 @@ async function getLanzamiento(id){
     }
 }
 
-//TODO insert (PROBAR)
+
 async function insertLanzamiento(nombre, descripcion, artistaId, generoId, rutaImagen = 'lanzamiento(1).jpg'){
 
     var obj ={
@@ -56,7 +56,7 @@ async function insertLanzamiento(nombre, descripcion, artistaId, generoId, rutaI
     }
 }
 
-//TODO update (PROBAR)
+
 async function updateLanzamiento(lanzamientoId, nombre, descripcion, artistaId, generoId , rutaImagen = 'lanzamiento(1).jpg'){
     
     var obj ={
@@ -78,8 +78,6 @@ async function updateLanzamiento(lanzamientoId, nombre, descripcion, artistaId, 
     }
 }
 
-
-//TODO delete (PROBAR)
 async function deleteLanzamiento(lanzamientoId){
     try{
         var query = 'delete from canciones where id = ?';

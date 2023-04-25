@@ -25,6 +25,31 @@ function mapeo(resultados){
     return resultados;
 }
 
+function mapeoFront(resultados){
+
+  resultados = resultados.map(obj =>{
+      if(obj.rutaImagen){
+        const imagen = cloudinary.url(obj.rutaImagen,{
+          width:960,
+          height:960,
+          crop:'fill'
+        });
+        return{
+          ...obj,
+          imagen
+        }
+      }
+      else{
+        return{
+          ...obj,
+          imagen: ''
+        }
+      }
+    });
+
+  return resultados;
+}
+
 function mapeoUnico(resultado){
     resultado.imagen = cloudinary.image(resultado.rutaImagen,{
         width:100,
@@ -36,4 +61,4 @@ function mapeoUnico(resultado){
 }
 
 
-module.exports = {mapeo,mapeoUnico}
+module.exports = {mapeo,mapeoUnico,mapeoFront}

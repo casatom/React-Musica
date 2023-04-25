@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var fileUpload = require('express-fileupload')
+var cors = require('cors')
 
 var session = require('express-session')
 
@@ -18,6 +19,8 @@ var adminRouter = require('./routes/admin/home');
 var loginUsersRouter = require('./routes/users/login')
 var usersRouter = require('./routes/users/home')
 
+var apiRouter = require('./routes/api')
+
 var adminGenerosRouter = require('./routes/admin/generos');
 var adminLanzamientosRouter = require('./routes/admin/lanzamientos');
 var adminArtistasRouter = require('./routes/admin/artistas');
@@ -28,7 +31,6 @@ var usersLanzamientosRouter = require('./routes/users/lanzamientos');
 var usersArtistasRouter = require('./routes/users/artistas');
 var usersContactoRouter = require('./routes/users/contacto');
 
-var artistaModel = require('./models/artistasModel')
 
 var app = express();
 
@@ -94,9 +96,6 @@ securedUsers = async (req,res,next)=>{
   }
 }
 
-app.get("/static", (req, res) => {
-  res.render("static");
-});
 
 app.use('/', indexRouter);
 
@@ -115,6 +114,8 @@ app.use('/users/lanzamientos', securedUsers , usersLanzamientosRouter);
 app.use('/users/generos', securedUsers , usersGenerosRouter);
 app.use('/users/artistas', securedUsers , usersArtistasRouter);
 app.use('/users/contacto', securedUsers , usersContactoRouter);
+
+app.use('/api', cors(),apiRouter);
 
 /*
 var resultado =  artistaModel.insertArtista('nombrePrueba','descripcionprueba');

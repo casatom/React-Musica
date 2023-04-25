@@ -5,9 +5,6 @@ var uploader = require('./../../models/uploader');
 var mapeadorImagenes = require('./../../models/mappearImagenes');
 
 
-//TODO modificar la ruta de imagen antes de agregar, editar y despues de buscarla(usar una funcion para agregar la ruta)
-
-//TODO modificar la vista para poner botones de alta, baja y modificacion
 router.get("/", async (req, res, next) => {
   var resultados = await artistasModel.getAllArtistas();
 
@@ -21,12 +18,6 @@ router.get("/", async (req, res, next) => {
   });
 });
 
-//TODO agregar el ruteo de alta, baja y modificacion de artistas
-
-//TODO agregar la vista de alta de lanzamientos
-
-//TODO agregar la vista de modificacion de artistas
-
 //alta
 router.get("/alta", function (req, res, next) {
   res.render("admin/crearArtista", {
@@ -39,7 +30,7 @@ router.get("/alta", function (req, res, next) {
 router.post("/alta", async (req, res, next) => {
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.ruta_imagen;
+  var rutaImagen = req.body.rutaImagen;
 
   
 
@@ -103,7 +94,12 @@ router.post("/editable", async (req, res, next) => {
       conocido: 1,
     });
   } else {
-    res.redirect('/admin/artistas')
+    res.render("admin/editarArtista", {
+      layout: "admin/layout",
+      nombre: req.session.nombre,
+      conocido: 1,
+      errorEdicion: 1
+    });
   }
 });
 
@@ -168,7 +164,7 @@ router.post("/borrar", async (req, res, next) => {
       artistas: await artistasModel.getAllArtistas(),
       nombre: req.session.nombre,
       conocido: 1,
-      errorEdicion: 1,
+      errorEliminar: 1,
     });
   }
 });

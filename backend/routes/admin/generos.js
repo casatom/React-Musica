@@ -1,9 +1,13 @@
 var express = require("express");
 var router = express.Router();
 var generosModel = require("./../../models/generosModel");
+var uploader = require('./../../models/uploader');
+var mapeadorImagenes = require('./../../models/mappearImagenes');
 
 router.get("/", async (req, res, next) => {
   var generos = await generosModel.getAllGeneros();
+
+  generos = mapeadorImagenes.mapeo(generos)
 
   res.render("admin/generos", {
     layout: "admin/layout",
@@ -36,7 +40,7 @@ router.get("/alta", function (req, res, next) {
 router.post("/alta", async (req, res, next) => {
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.ruta_imagen;
+  var rutaImagen = req.body.rutaImagen;
 
   //guardar imagen en la ruta correspondiente
 
@@ -47,11 +51,11 @@ router.post("/alta", async (req, res, next) => {
   console.log("ruta "+rutaImagen);
   var resultado;
 
-  if(nombre!=undefined && descripcion!=undefined && nombre!=undefined ){
+  if(nombre!=undefined && descripcion!=undefined ){
     resultado = await generosModel.insertGenero(
       nombre,
       descripcion,
-      rutaImagen
+      await uploader.subir(req.files)
     );
   }
   else{
@@ -82,6 +86,8 @@ router.post("/editable", async (req, res, next) => {
 
   var resultado = await generosModel.getGenero(id);
 
+  resultado = mapeadorImagenes.mapeoUnico(resultado);
+
   if (resultado) {
     res.render("admin/editarGenero", {
       layout: "admin/layout",
@@ -90,12 +96,15 @@ router.post("/editable", async (req, res, next) => {
       conocido: 1,
     });
   } else {
-    res.render("admin/editarGenero", {
+    res.render("/admin/generos", {
       layout: "admin/layout",
+      //TODO rever
+      generos: await generosModel.getAllGeneros(),
       nombre: req.session.nombre,
       conocido: 1,
-      errorEdicion: 1
+      errorEdicion: 1,
     });
+    
   }
 });
 
@@ -104,7 +113,7 @@ router.post("/editar", async (req, res, next) => {
   var id = req.body.generoId; 
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.ruta_imagen;
+  var rutaImagen = req.body.rutaImagenAnterior;
 
   console.log("id "+id)
   console.log("nombre "+nombre)
@@ -117,7 +126,10 @@ router.post("/editar", async (req, res, next) => {
   rutaImagen = "rock.jpg"
    */
 
-  var resultado = await generosModel.updateGenero(id,nombre,descripcion,rutaImagen);
+  var resultado = await generosModel.updateGenero(id,nombre,descripcion,
+    await uploader.modificar(req.files,rutaImagen));
+
+
 
 
   if(resultado){
@@ -141,8 +153,11 @@ router.post("/borrar", async (req, res, next) => {
 
   console.log(id);
 
+  var generoBorrado = await generosModel.getGenero(id);
+
   var resultado = await generosModel.deleteGenero(id);
 
+  await uploader.borrar(generoBorrado.rutaImagen)
 
   console.log(resultado);
 
@@ -151,10 +166,11 @@ router.post("/borrar", async (req, res, next) => {
   } else {
     res.render("/admin/generos", {
       layout: "admin/layout",
-      generos:req.body.generos,
+      //TODO rever
+      generos: await generosModel.getAllGeneros(),
       nombre: req.session.nombre,
       conocido: 1,
-      errorEdicion:1
+      errorEliminar: 1,
     });
   }
 });

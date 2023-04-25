@@ -85,7 +85,8 @@ li h3 {
 }
 
 li img {
-  width: 150px;
+  width: 250px;
+  height: 250px;
   margin-left: 20px;
 }
 
@@ -102,9 +103,19 @@ footer {
 }
 
 #generos {
+  
   background-color: #f8f8f8;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  
+  flex-direction: column;
+  align-content: flex-start;
 }
+
+
 
 #generos h2 {
   margin-top: 0;
@@ -309,7 +320,6 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
 }
 
 .login-form {

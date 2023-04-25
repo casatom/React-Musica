@@ -1,23 +1,25 @@
 <section>
   <h2>Nuevos lanzamientos</h2>
-
+<br>
   <ul>
     {{#each lanzamientos}}
       <li>
         <h3>{{this.nombre}}</h3>
-        <img src="/images/sencillos/{{this.rutaImagen}}" alt="cancion {{this.nombre}}" />
+        {{{this.imagen}}}
         <p>{{this.descripcion}}</p>
       </li>
     {{/each}}
   </ul>
 </section>
+<br>
 <section>
   <h2>Artistas emergentes</h2>
+  <br>
   <ul>
     {{#each artistas}}
       <li>
         <h3>{{this.nombre}}</h3>
-        <img src="/images/sencillos/{{this.rutaImagen}}" alt="cancion {{this.nombre}}" />
+        {{{this.imagen}}}
         <p>{{this.descripcion}}</p>
       </li>
     {{/each}}

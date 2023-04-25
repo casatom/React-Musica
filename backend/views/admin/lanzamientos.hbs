@@ -28,13 +28,11 @@
   <a href="/admin/lanzamientos/alta"><button class="btn btn-outline-primary">Crear
         Lanzamiento</button></a>
 
+  <br><br>
   <ul>
     {{#each lanzamientos}}
       <li>
-        <img
-          src="/images/lanzamiento/{{this.rutaImagen}}"
-          alt="lanzamiento {{this.nombre}}"
-        />
+        {{{this.imagen}}}
         <div>
           <h3>{{this.nombre}}</h3>
           <p>

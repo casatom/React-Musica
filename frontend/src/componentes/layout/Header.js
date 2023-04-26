@@ -13,10 +13,7 @@ const Header = (props) => {
                 </Link>
             </div>
             <div class="parte-izq">
-                <div class="header-top">
-                    <button class="user-btn"><Link to="/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Log In</Link></button>
-                    <button class="admin-btn"><Link to="/admin/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Admin</Link></button>
-                </div>
+               
                 <nav>
                     <ul>
 
@@ -31,5 +28,11 @@ const Header = (props) => {
         </header>
     )
 }
+
+ /*
+                <div class="header-top">
+                    <button class="user-btn"><Link to="/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Log In</Link></button>
+                    <button class="admin-btn"><Link to="/admin/login" style={{ color: 'inherit', textDecoration: 'inherit' }}>Admin</Link></button>
+                </div>*/
 
 export default Header;

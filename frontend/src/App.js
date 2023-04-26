@@ -12,14 +12,15 @@ import LanzamientosPage from './pages/LanzamientosPage';
 import ArtistasNuevosPage from './pages/ArtistasNuevosPage';
 import ContactoPage from './pages/ContactoPage';
 
+/*
 import LoginAdmin from './pages/LoginAdmin';
-import LoginNormal from './pages/LoginNormal';
+import LoginNormal from './pages/LoginNormal';*/
 
 function App() {
   return (
     <div className='App'>
 
-
+ 
       <BrowserRouter>
         <Header />
         <Routes>
@@ -28,8 +29,6 @@ function App() {
           <Route path='/lanzamientos' element={<LanzamientosPage />} />
           <Route path='/nuevosartistas' element={<ArtistasNuevosPage />} />
           <Route path='/contacto' element={<ContactoPage />} />
-          <Route path='/login' element={<LoginNormal />} />
-          <Route path='/admin/login' element={<LoginAdmin />} />
         </Routes>
       </BrowserRouter>
 
@@ -37,5 +36,10 @@ function App() {
     </div>
   );
 }
+
+
+          /*
+          <Route path='/login' element={<LoginNormal />} />
+          <Route path='/admin/login' element={<LoginAdmin />} />*/
 
 export default App;

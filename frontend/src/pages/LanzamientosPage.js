@@ -1,33 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import LanzamientoItem from "../componentes/items/lanzamientoItem";
 
-const HomePage = (props) => {
-    return (
-        <main>
-            <section id="lanzamientos">
-                <h2>Lanzamientos</h2>
-                <ul>
-                    <li>
-                        <img src="img/lanzamiento/lanzamientos (1).png" alt="Lanzamiento 1" />
-                        <h3>Canción 1</h3>
-                        <p>Artista 1</p>
-                        <a href="#" class="btn">Escuchar</a>
-                    </li>
-                    <li>
-                        <img src="img/lanzamiento/lanzamientos (2).png" alt="Lanzamiento 2" />
-                        <h3>Canción 2</h3>
-                        <p>Artista 2</p>
-                        <a href="#" class="btn">Escuchar</a>
-                    </li>
-                    <li>
-                        <img src="img/lanzamiento/lanzamientos (3).png" alt="Lanzamiento 3" />
-                        <h3>Canción 3</h3>
-                        <p>Artista 3</p>
-                        <a href="#" class="btn">Escuchar</a>
-                    </li>
-                </ul>
-            </section>
-        </main>
-    )
-}
+const LanzamientosPage = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [lanzamientos, setLanzamiento] = useState([]);
 
-export default HomePage;
+  useEffect(() => {
+    const cargarLanzamiento = async () => {
+      setLoading(true);
+      const response = await axios.get("http://localhost:3000/api/lanzamientos");
+      setLanzamiento(response.data);
+      setLoading(false);
+    };
+    cargarLanzamiento();
+  }, []);
+
+  return (
+    <main>
+      <section id="lanzamientos">
+        <h2>Lanzamientos</h2>
+        <ul>
+          {loading ? (
+            <p>Cargando...</p>
+          ) : (
+            lanzamientos.map((item) => (
+              <LanzamientoItem
+                key={item.id}
+                nombre={item.nombre}
+                descripcion={item.descripcion}
+                genero = {item.generoNombre}
+                artista = {item.artistaNombre}
+                imagen={item.imagen}
+                body={item.cuerpo}
+              />
+            ))
+          )}
+        </ul>
+      </section>
+    </main>
+  );
+};
+
+export default LanzamientosPage;

@@ -1,3 +1,5 @@
+<h1>Edición de Artista</h1>
+<br>
 <form action="/admin/artistas/editar" method="post"  enctype="multipart/form-data">
 
   <!-- var nombre = req.body.nombre;
@@ -10,7 +12,7 @@
   </div>
   <div class="mb-3">
     <label for="descripcion" class="form-label">Descripcion</label>
-    <input type="text" class="form-control" name="descripcion" value="{{artista.descripcion}}" />
+    <textarea type="text" class="form-control" name="descripcion" aria-label="With textarea" >{{artista.descripcion}}</textarea>
   </div>
   <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>

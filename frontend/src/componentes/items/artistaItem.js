@@ -10,7 +10,7 @@ const ArtistasItem = (props) => {
             <h3>{nombre}</h3>
             <p>{descripcion}</p>
             <div dangerouslySetInnerHTML={{ __html:body}} />
-            <hr/>
+        
         </div>
     );
 

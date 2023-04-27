@@ -1,3 +1,5 @@
+<h1>Edición de Lanzamiento</h1>
+<br>
 <form action="/admin/lanzamientos/editar" method="post" enctype="multipart/form-data">
 
   <!-- var nombre = req.body.nombre;
@@ -15,12 +17,7 @@
   </div>
   <div class="mb-3">
     <label for="descripcion" class="form-label">Descripcion</label>
-    <input
-      type="text"
-      class="form-control"
-      name="descripcion"
-      value="{{lanzamiento.descripcion}}"
-    />
+    <textarea type="text" class="form-control" name="descripcion" aria-label="With textarea" >{{lanzamiento.descripcion}}</textarea>
   </div>
   <div class="mb-3">
 
@@ -56,7 +53,7 @@
   <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>
     <input class="form-control" type="file" name="rutaImagen" 
-     id="imagen" onchange="previewImage();" accept="image/*" />
+     id="imagen" onchange="previewImage();" accept="image/*" value="{{lanzamiento.rutaImagen}}" />
     <br><br>
     <h2 >Imagen Anterior...</h2>
     <br><br>

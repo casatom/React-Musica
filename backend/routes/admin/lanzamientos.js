@@ -5,12 +5,16 @@ var generosModel = require('./../../models/generosModel');
 var artistasModel = require('./../../models/artistasModel');
 var mapeadorImagenes = require('./../../models/mappearImagenes');
 var uploader = require('./../../models/uploader');
+var uploaderAudio = require('./../../models/uploaderAudio');
+var mapeadorAudios = require('./../../models/mappearAudios');
 
 router.get('/', async(req, res, next) =>  {
 
   var resultados = await lanzamientoModel.getAllLanzamientos();
 
-  resultados = mapeadorImagenes.mapeo(resultados)
+  resultados = mapeadorImagenes.mapeo(resultados);
+
+  resultados = mapeadorAudios.mapeo(resultados);
 
   res.render('admin/lanzamientos',{
     layout: 'admin/layout',
@@ -60,7 +64,8 @@ router.post("/alta", async (req, res, next) => {
       descripcion,
       artistaId,
       generoId,
-      await uploader.subir(req.files)
+      await uploader.subir(req.files),
+      await uploaderAudio.subir(req.files)
     );
   }
   else{
@@ -96,6 +101,7 @@ router.post("/editable", async (req, res, next) => {
   var resultado = await lanzamientoModel.getLanzamiento(id);
 
   resultado = mapeadorImagenes.mapeoUnico(resultado);
+  resultado = mapeadorAudios.mapeoUnico(resultado);
 
   if (resultado) {
     res.render("admin/editarLanzamiento", {
@@ -121,7 +127,8 @@ router.post("/editar", async (req, res, next) => {
   var id = req.body.lanzamientoId; 
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.rutaImagenAnterior;
+  var rutaImagenAnterior = req.body.rutaImagenAnterior;
+  var rutaAudioAnterior = req.body.rutaAudioAnterior;
   var artistaId = req.body.artistaIdEditado;
   var generoId = req.body.generoIdEditado;
 
@@ -130,7 +137,18 @@ router.post("/editar", async (req, res, next) => {
   console.log("Id a editar: " + id);
   console.log("nombre " + nombre);
   console.log("descripcion " + descripcion);
-  console.log("ruta "+ rutaImagen);
+
+  console.log("--Body--")
+  console.log("rutaImagen "+ req.body.rutaImagen);
+  console.log("rutaAudio "+ req.body.rutaAudio);
+
+  console.log("--Files--")
+  console.log("rutaImagen "+ req.files.rutaImagen);
+  console.log("rutaAudio "+ req.files.rutaAudio);
+  console.log("file keys "+  Object.keys(req.files))
+
+  console.log("rutaImagenAnterior "+ rutaImagenAnterior);
+  console.log("rutaAudioAnterior "+ rutaAudioAnterior);
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
 
@@ -139,10 +157,25 @@ router.post("/editar", async (req, res, next) => {
    * generoId,	nombre,	descripcion,	
   rutaImagen = "rock.jpg"
    */
+  var resultado;
 
-  var resultado = await lanzamientoModel.updateLanzamiento(id,nombre,descripcion,artistaId,generoId,
-    await uploader.modificar(req.files,rutaImagen));
-
+  //TODO hacer una mejor verificacion de que hay archivos 
+  //TODO ver porq tarda tanto
+  // req.files && Object.keys(req.files).length > 0
+  if(false){
+    resultado = await lanzamientoModel.updateLanzamiento(id,nombre,descripcion,artistaId,generoId,
+      await uploader.modificar(req.files,rutaImagenAnterior),
+      await uploaderAudio.modificar(req.files, rutaAudioAnterior));
+  }
+  else{
+    var obj = {
+      nombre: nombre,
+      descripcion: descripcion,
+      artistaId: artistaId,
+      generoId: generoId
+    }
+    resultado = await lanzamientoModel.updateLanzamiento(id,obj)
+  }
 
   if(resultado){
     res.redirect("/admin/lanzamientos");
@@ -164,7 +197,9 @@ router.post("/borrar", async (req, res, next) => {
 
   var resultado = await lanzamientoModel.deleteLanzamiento(id);
 
-  await uploader.borrar(lanzamientoBorrado.rutaImagen)
+  await uploader.borrar(lanzamientoBorrado.rutaImagen);
+
+  await uploaderAudio.borrar(lanzamientoBorrado.rutaAudio)
 
   console.log(resultado);
 

@@ -9,7 +9,7 @@ const LanzamientoItem = (props) => {
       <h3>{nombre}</h3>
       <h5>{artista}</h5>
       <p>{genero}</p>
-      <a href="#" class="btn">Escuchar</a>
+      <a href="#" class="btn-escuchar">Escuchar</a>
 
       <div dangerouslySetInnerHTML={{ __html:body}} />
     </li>

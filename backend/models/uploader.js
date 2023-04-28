@@ -16,14 +16,11 @@ async function subir(files){
 async function modificar(files,rutaImagenAnterior){
     await borrar(rutaImagenAnterior);
 
-
     var rutaImagen='';
     if(files && Object.keys(files).length > 0){
       imagen = files.rutaImagen;
       rutaImagen = (await uploader(imagen.tempFilePath)).public_id
     }
-
-    
 
     return rutaImagen
 }
@@ -34,6 +31,9 @@ async function borrar(rutaImagen){
         await (destroy(rutaImagen))
     }
 }
+
+
+
 
 
 

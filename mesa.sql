@@ -51,7 +51,6 @@ CREATE TABLE IF NOT EXISTS `canciones` (
   `nombre` varchar(255) NOT NULL,
   `fechaAlta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rutaImagen` varchar(255) DEFAULT NULL,
-  `rutaAudio` VARCHAR(255) DEFAULT NULL,
   `descripcion` text NOT NULL,
   `artistaId` int DEFAULT NULL,
   `generoId` int DEFAULT NULL,

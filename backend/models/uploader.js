@@ -27,7 +27,7 @@ async function modificar(files,rutaImagenAnterior){
 
 async function borrar(rutaImagen){
 
-    if(rutaImagen){
+    if(rutaImagen || rutaImagen ===undefined){
         await (destroy(rutaImagen))
     }
 }

@@ -58,19 +58,35 @@ router.post("/alta", async (req, res, next) => {
   console.log("generoId "+ generoId);
   var resultado;
 
-  if(nombre!=undefined && descripcion!=undefined && nombre!=undefined && artistaId!=undefined && generoId!=undefined ){
-    resultado = await lanzamientoModel.insertLanzamiento(
-      nombre,
-      descripcion,
-      artistaId,
-      generoId,
-      await uploader.subir(req.files),
-      await uploaderAudio.subir(req.files)
-    );
+  if(nombre===undefined || descripcion===undefined || artistaId===undefined || generoId === undefined ){
+    res.render("admin/crearLanzamiento", {
+      layout: "admin/layout",
+      nombre: req.session.nombre,
+      conocido: 1,
+      errorCreacion: 1,
+    });
   }
-  else{
-    resultado = false;
+
+  var lan = {
+    nombre: nombre,
+    descripcion: descripcion,
+    artistaId: artistaId,
+    generoId: generoId
   }
+
+  // req.files && Object.keys(req.files).length > 0
+  if(req.files){
+    if(Object.keys(req.files).includes('rutaImagen')){
+      var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+      lan["rutaImagen"] = imagen;
+    }
+    if(Object.keys(req.files).includes('rutaAudio')){
+      var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
+      lan["rutaAudio"] = audio;
+    }
+  }
+
+  resultado = await lanzamientoModel.insertLanzamientoObj(lan);
 
   console.log("resultado : "+resultado)
 
@@ -137,50 +153,55 @@ router.post("/editar", async (req, res, next) => {
   console.log("Id a editar: " + id);
   console.log("nombre " + nombre);
   console.log("descripcion " + descripcion);
-
-  console.log("--Body--")
-  console.log("rutaImagen "+ req.body.rutaImagen);
-  console.log("rutaAudio "+ req.body.rutaAudio);
-
-  console.log("--Files--")
-  console.log("rutaImagen "+ req.files.rutaImagen);
-  console.log("rutaAudio "+ req.files.rutaAudio);
-  console.log("file keys "+  Object.keys(req.files))
-
-  console.log("rutaImagenAnterior "+ rutaImagenAnterior);
-  console.log("rutaAudioAnterior "+ rutaAudioAnterior);
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
 
+  if(nombre===undefined || descripcion===undefined || artistaId===undefined || generoId === undefined ){
+    //TODO enviar el error
+    res.redirect("/admin/lanzamientos");
+  }
   /**
    * 
    * generoId,	nombre,	descripcion,	
-  rutaImagen = "rock.jpg"
+  rutaImagen 
    */
   var resultado;
 
-  //TODO hacer una mejor verificacion de que hay archivos 
-  //TODO ver porq tarda tanto
+  var lan = {
+    nombre: nombre,
+    descripcion: descripcion,
+    artistaId: artistaId,
+    generoId: generoId
+  }
+
   // req.files && Object.keys(req.files).length > 0
-  if(false){
-    resultado = await lanzamientoModel.updateLanzamiento(id,nombre,descripcion,artistaId,generoId,
-      await uploader.modificar(req.files,rutaImagenAnterior),
-      await uploaderAudio.modificar(req.files, rutaAudioAnterior));
-  }
-  else{
-    var obj = {
-      nombre: nombre,
-      descripcion: descripcion,
-      artistaId: artistaId,
-      generoId: generoId
+  if(req.files){
+      
+    console.log("--Files--")
+    console.log("file keys "+  Object.keys(req.files))
+      
+    console.log("--Body--")
+    if(Object.keys(req.files).includes('rutaImagen')){
+      console.log("rutaImagenAnterior "+ rutaImagenAnterior)
+      var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+      lan["rutaImagen"] = imagen;
+      console.log("rutaImagen "+ imagen);
     }
-    resultado = await lanzamientoModel.updateLanzamiento(id,obj)
+    if(Object.keys(req.files).includes('rutaAudio')){
+      console.log("rutaAudioAnterior "+rutaAudioAnterior)
+      var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
+      lan["rutaAudio"] = audio;
+      console.log("rutaAudio "+audio)
+    }
   }
+
+  resultado = await lanzamientoModel.updateLanzamientoObj(id,lan);
 
   if(resultado){
     res.redirect("/admin/lanzamientos");
   }
   else{
+    //TODO enviar el error
     res.redirect("/admin/lanzamientos");
   }  
 });

@@ -77,11 +77,11 @@ router.post("/alta", async (req, res, next) => {
   // req.files && Object.keys(req.files).length > 0
   if(req.files){
     if(Object.keys(req.files).includes('rutaImagen')){
-      var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+      var imagen = await uploader.subir(req.files);
       lan["rutaImagen"] = imagen;
     }
     if(Object.keys(req.files).includes('rutaAudio')){
-      var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
+      var audio = await uploaderAudio.subir(req.files);
       lan["rutaAudio"] = audio;
     }
   }

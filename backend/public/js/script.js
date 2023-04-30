@@ -10,3 +10,33 @@ function previewImage() {
         fileReader.readAsDataURL(file[0])
     }
 }
+
+//TODO pasar esto a React
+function initRepro(index){
+    // Obtiene el elemento a reproducir
+    var reproductor = document.getElementById("reproductor" + index);
+
+    return reproductor
+}
+
+function play(index){
+    reproductor = initRepro(index);
+    reproductor.play();
+    console.log("PLAY "+reproductor);
+}
+
+function pause(index){
+    reproductor = initRepro(index);
+    reproductor.pause();
+
+    
+    console.log("PAUSE "+reproductor);
+}
+
+function stop(index){
+    reproductor = initRepro(index);
+    reproductor.pause();
+    reproductor.currentTime = 0;
+    
+    console.log("STOP "+reproductor);
+}

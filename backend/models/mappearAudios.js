@@ -4,7 +4,7 @@ function mapeo(resultados){
 
     resultados = resultados.map(obj =>{
         if(obj.rutaAudio){
-          const audio = cloudinary.url(obj.rutaAudio);
+          const audio = cloudinary.url(obj.rutaAudio,{resource_type: "video" });
           return{
             ...obj,
             audio
@@ -25,7 +25,7 @@ function mapeoFront(resultados){
 
   resultados = resultados.map(obj =>{
       if(obj.rutaAudio){
-        const audio = cloudinary.url(obj.rutaAudio);
+        const audio = cloudinary.url(obj.rutaAudio,{resource_type: "video" });
         return{
           ...obj,
           audio
@@ -43,7 +43,7 @@ function mapeoFront(resultados){
 }
 
 function mapeoUnico(resultado){
-    resultado.audio = cloudinary.url(resultado.rutaAudio);
+    resultado.audio = cloudinary.url(resultado.rutaAudio,{resource_type: "video" });
 
     return resultado;
 }

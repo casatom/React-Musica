@@ -1,6 +1,8 @@
 TODO
+[ ] la edicion/creacion de imagenes en Back
+[ ] parar todos las canciones en Front/Back
 [ ] corregir los avisos de errores
-[ ] subida de Audios en Front
+[X] Audios en Front
 [ ] corregir el alert del envio de mail en Back
 [X] subida de Audios en Back
 

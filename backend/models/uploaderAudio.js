@@ -8,7 +8,6 @@ async function subir(files) {
   if (files && Object.keys(files).length > 0) {
     audio = files.rutaAudio;
     console.log("EL AUDIO QUE SUBO ES " + audio.tempFilePath);
-    // TODO cambiar el tipo de archivo a video
     rutaAudio = (await uploader(audio.tempFilePath,{resource_type: "video" }).catch(error => console.log(error))).public_id;
     console.log("SUBI EL AUDIO");
   }

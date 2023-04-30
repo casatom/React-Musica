@@ -11,7 +11,6 @@ function previewImage() {
     }
 }
 
-//TODO pasar esto a React
 function initRepro(index){
     // Obtiene el elemento a reproducir
     var reproductor = document.getElementById("reproductor" + index);

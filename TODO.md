@@ -1,6 +1,9 @@
 TODO
 [ ] corregir los avisos de errores
-[ ] subida de Audios
+[ ] subida de Audios en Front
+[ ] corregir el alert del envio de mail en Back
+[X] subida de Audios en Back
+
 
 
 [X] completar las imagenes en:

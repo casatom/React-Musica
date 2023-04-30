@@ -20,13 +20,13 @@ function initRepro(index){
 }
 
 function play(index){
-    reproductor = initRepro(index);
+    var reproductor = initRepro(index);
     reproductor.play();
     console.log("PLAY "+reproductor);
 }
 
 function pause(index){
-    reproductor = initRepro(index);
+    var reproductor = initRepro(index);
     reproductor.pause();
 
     
@@ -34,7 +34,7 @@ function pause(index){
 }
 
 function stop(index){
-    reproductor = initRepro(index);
+    var reproductor = initRepro(index);
     reproductor.pause();
     reproductor.currentTime = 0;
     

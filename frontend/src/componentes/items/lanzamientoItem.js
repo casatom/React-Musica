@@ -1,7 +1,16 @@
 import React from "react";
+import Reproductor from "../js/reproductor";
 
 const LanzamientoItem = (props) => {
-  const { nombre, descripcion, genero, artista, imagen, body } = props;
+  const {id,nombre,audio, descripcion, genero, artista, imagen, body } = props;
+
+  const reproductor = "reproductor"+ id;
+  
+  /*
+  const play = "play("+ id + ")";
+  const pause = "pause("+ id + ")";
+  const stop = "stop("+ id + ")";
+  */
 
   return (
     <li>
@@ -9,7 +18,12 @@ const LanzamientoItem = (props) => {
       <h3>{nombre}</h3>
       <h5>{artista}</h5>
       <p>{genero}</p>
-      <a href="#" class="btn-escuchar">Escuchar</a>
+
+      <audio hidden id={reproductor} controls>
+        <source src={audio}/>
+      </audio>
+
+      <Reproductor index= {id}/>
 
       <div dangerouslySetInnerHTML={{ __html:body}} />
     </li>

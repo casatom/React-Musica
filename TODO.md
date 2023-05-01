@@ -1,6 +1,6 @@
 TODO
-[ ] corregir el alert del envio de mail en Back
-[ ] la edicion/creacion de imagenes en Back
+[X] corregir el alert del envio de mail en Back
+[X] la edicion/creacion de imagenes en Back
 [ ] API para enviar mails 
 [ ] corregir los avisos de errores
 [ ] Estado de cancion en Back/Front

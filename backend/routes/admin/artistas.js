@@ -113,7 +113,7 @@ router.post("/editar", async (req, res, next) => {
   var id = req.body.artistaId;
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.rutaImagenAnterior;
+  var rutaImagenAnterior = req.body.rutaImagenAnterior;
 
   console.log("EDITE ESTO..........")
 
@@ -121,17 +121,44 @@ router.post("/editar", async (req, res, next) => {
   console.log("id " + id);
   console.log("nombre " + nombre);
   console.log("descripcion " + descripcion);
-  console.log("rutaImagen " + rutaImagen);
+  console.log("rutaImagenAnterior " + rutaImagenAnterior);
+  var resultado = false;
 
   /**
    * 
-   * generoId,	nombre,	descripcion,	
+   * artistaId,	nombre,	descripcion,	
   rutaImagen = "rock.jpg"
    */
 
-  
+  var artista = {
+    nombre:nombre,
+    descripcion:descripcion,
+  }
+
+
+  if(nombre!=="" && descripcion!=="" ){
+    // req.files && Object.keys(req.files).length > 0
+    if(req.files){
+        
+      console.log("--Files--")
+      console.log("file keys "+  Object.keys(req.files))
+        
+      console.log("--Body--")
+      if(Object.keys(req.files).includes('rutaImagen')){
+        console.log("rutaImagenAnterior "+ rutaImagenAnterior)
+        var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+        artista["rutaImagen"] = imagen;
+        console.log("rutaImagen "+ imagen);
+      }
+      
+    }
+    resultado = await artistasModel.updateArtistaObj(artista,id);
+  } 
+
+  /*
   resultado = await artistasModel.updateArtista(id,nombre,descripcion,
-    await uploader.modificar(req.files,rutaImagen));
+    await uploader.modificar(req.files,rutaImagenAnterior));
+  */
 
   if (resultado) {
     res.redirect("/admin/artistas");

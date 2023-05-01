@@ -1,6 +1,6 @@
 <section id="contacto">
   <h2>Contacto</h2>
-  <form action="/users/contacto" method="post" >
+  <form action="/users/contacto" method="post">
     <div>
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" required />
@@ -14,5 +14,16 @@
       <textarea id="mensaje" name="mensaje" required></textarea>
     </div>
     <button type="submit" class="btn">Enviar</button>
+    <br />
+    {{#if envioCorrecto}}
+      <div
+        class="p-3 text-success-emphasis text-success text-center bg-success-subtle border border-success-subtle rounded-3"
+      >Se ha enviado un mail al administrador</div>
+    {{/if}}
+    {{#if envioError}}
+      <div
+        class="p-3 text-danger-emphasis text-danger text-center bg-danger-subtle border border-danger-subtle rounded-3"
+      >Ocurrio un error al enviar su mensaje. Por favor, intentelo nuevamente</div>
+    {{/if}}
   </form>
 </section>

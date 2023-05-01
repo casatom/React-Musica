@@ -153,16 +153,13 @@ router.post("/editar", async (req, res, next) => {
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
 
-  if(nombre===undefined || descripcion===undefined || artistaId===undefined || generoId === undefined ){
-    //TODO enviar el error
-    res.redirect("/admin/lanzamientos");
-  }
+  
   /**
    * 
    * generoId,	nombre,	descripcion,	
   rutaImagen 
    */
-  var resultado;
+  var resultado =false;
 
   var lan = {
     nombre: nombre,
@@ -171,28 +168,30 @@ router.post("/editar", async (req, res, next) => {
     generoId: generoId
   }
 
-  // req.files && Object.keys(req.files).length > 0
-  if(req.files){
-      
-    console.log("--Files--")
-    console.log("file keys "+  Object.keys(req.files))
-      
-    console.log("--Body--")
-    if(Object.keys(req.files).includes('rutaImagen')){
-      console.log("rutaImagenAnterior "+ rutaImagenAnterior)
-      var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
-      lan["rutaImagen"] = imagen;
-      console.log("rutaImagen "+ imagen);
+  if(nombre!=="" && descripcion!=="" && artistaId!==undefined && generoId !== undefined ){
+    // req.files && Object.keys(req.files).length > 0
+    if(req.files){
+        
+      console.log("--Files--")
+      console.log("file keys "+  Object.keys(req.files))
+        
+      console.log("--Body--")
+      if(Object.keys(req.files).includes('rutaImagen')){
+        console.log("rutaImagenAnterior "+ rutaImagenAnterior)
+        var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+        lan["rutaImagen"] = imagen;
+        console.log("rutaImagen "+ imagen);
+      }
+      if(Object.keys(req.files).includes('rutaAudio')){
+        console.log("rutaAudioAnterior "+rutaAudioAnterior)
+        var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
+        lan["rutaAudio"] = audio;
+        console.log("rutaAudio "+audio)
+      }
     }
-    if(Object.keys(req.files).includes('rutaAudio')){
-      console.log("rutaAudioAnterior "+rutaAudioAnterior)
-      var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
-      lan["rutaAudio"] = audio;
-      console.log("rutaAudio "+audio)
-    }
+    resultado = await lanzamientoModel.updateLanzamientoObj(id,lan);
   }
 
-  resultado = await lanzamientoModel.updateLanzamientoObj(id,lan);
 
   if(resultado){
     res.redirect("/admin/lanzamientos");

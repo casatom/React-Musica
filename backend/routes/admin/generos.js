@@ -49,17 +49,25 @@ router.post("/alta", async (req, res, next) => {
   console.log("nombre "+nombre);
   console.log("descripcion "+descripcion);
   console.log("ruta "+rutaImagen);
-  var resultado;
+  var resultado = false;
 
-  if(nombre!=undefined && descripcion!=undefined ){
-    resultado = await generosModel.insertGenero(
-      nombre,
-      descripcion,
-      await uploader.subir(req.files)
-    );
+
+  var genero = {
+    nombre: nombre,
+    descripcion: descripcion
   }
-  else{
-    resultado = false;
+
+  
+
+  if(nombre!=="" && descripcion!==""){
+    // req.files && Object.keys(req.files).length > 0
+    if(req.files){
+      if(Object.keys(req.files).includes('rutaImagen')){
+        var imagen = await uploader.subir(req.files);
+        genero["rutaImagen"] = imagen;
+      }
+    }
+    resultado = await generosModel.insertGeneroObj(genero);
   }
 
   console.log("resultado : "+resultado)

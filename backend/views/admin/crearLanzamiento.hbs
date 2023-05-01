@@ -22,7 +22,7 @@
     <label for="artista" class="form-label">Artista</label>
 
     <select class="form-select" name="artistaIdCreado" aria-label="seleccion artista">
-      <option selected>Seleccione un artista...</option>
+      <option value="undefined" selected>Seleccione un artista...</option>
       {{#each artistas}}
         <option value="{{this.id}}">{{this.nombre}}</option>  
       {{/each}}
@@ -36,7 +36,7 @@
     <label for="genero" class="form-label">Genero</label>
 
     <select class="form-select" name="generoIdCreado" aria-label="seleccion genero">
-      <option selected>Seleccione un genero...</option>
+      <option value="undefined" selected>Seleccione un genero...</option>
       
       {{#each generos}}
         <option value="{{this.id}}">{{this.nombre}}</option>  

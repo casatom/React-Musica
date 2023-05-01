@@ -43,22 +43,28 @@ router.post("/alta", async (req, res, next) => {
   console.log("ruta " + rutaImagen);
   var resultado = false;
 
-  if (nombre && descripcion ) {
-    if (nombre != undefined && descripcion != undefined ) {
-      resultado = await artistasModel.insertArtista(
-        nombre,
-        descripcion,
-        await uploader.subir(req.files)
-      );
+
+  var artista = {
+    nombre: nombre,
+    descripcion: descripcion
+  }
+
+
+  if(nombre!=="" && descripcion!==""){
+    // req.files && Object.keys(req.files).length > 0
+    if(req.files){
+      if(Object.keys(req.files).includes('rutaImagen')){
+        var imagen = await uploader.subir(req.files);
+        artista["rutaImagen"] = imagen;
+      }
     }
+
+    resultado = await artistasModel.insertArtistaObj(artista);
   }
 
   console.log("resultado : " + resultado);
 
   if (resultado) {
-
-
-
     res.redirect("/admin/artistas");
   } else {
     res.render("admin/crearArtista", {

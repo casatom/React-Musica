@@ -56,16 +56,8 @@ router.post("/alta", async (req, res, next) => {
   console.log("ruta "+ rutaImagen);
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
-  var resultado;
+  var resultado =false;
 
-  if(nombre===undefined || descripcion===undefined || artistaId===undefined || generoId === undefined ){
-    res.render("admin/crearLanzamiento", {
-      layout: "admin/layout",
-      nombre: req.session.nombre,
-      conocido: 1,
-      errorCreacion: 1,
-    });
-  }
 
   var lan = {
     nombre: nombre,
@@ -74,19 +66,24 @@ router.post("/alta", async (req, res, next) => {
     generoId: generoId
   }
 
-  // req.files && Object.keys(req.files).length > 0
-  if(req.files){
-    if(Object.keys(req.files).includes('rutaImagen')){
-      var imagen = await uploader.subir(req.files);
-      lan["rutaImagen"] = imagen;
+  
+  if(nombre!=="" && descripcion!=="" && artistaId!=="undefined" && generoId !== "undefined" ){
+    if(req.files){
+      if(Object.keys(req.files).includes('rutaImagen')){
+        var imagen = await uploader.subir(req.files);
+        lan["rutaImagen"] = imagen;
+      }
+      if(Object.keys(req.files).includes('rutaAudio')){
+        var audio = await uploaderAudio.subir(req.files);
+        lan["rutaAudio"] = audio;
+      }
     }
-    if(Object.keys(req.files).includes('rutaAudio')){
-      var audio = await uploaderAudio.subir(req.files);
-      lan["rutaAudio"] = audio;
-    }
+  
+    resultado = await lanzamientoModel.insertLanzamientoObj(lan);
+  
   }
-
-  resultado = await lanzamientoModel.insertLanzamientoObj(lan);
+  // req.files && Object.keys(req.files).length > 0
+  
 
   console.log("resultado : "+resultado)
 

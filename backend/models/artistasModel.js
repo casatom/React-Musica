@@ -55,6 +55,19 @@ async function insertArtista(
   }
 }
 
+async function insertArtistaObj(obj){
+  try {
+    var query = "insert into artistas set ?";
+
+    await pool.query(query, [obj]);
+
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
 async function updateArtista(
   artistaId,
   nombre,	descripcion,	
@@ -66,6 +79,18 @@ async function updateArtista(
     rutaImagen: rutaImagen,
   };
 
+  try {
+    var query = "update artistas set ? where id=?";
+
+    await pool.query(query, [obj, artistaId]);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
+
+async function updateArtistaObj(obj,artistaId){
   try {
     var query = "update artistas set ? where id=?";
 
@@ -96,5 +121,7 @@ module.exports = {
   getTop3Artistas,
   deleteArtista,
   updateArtista,
-  insertArtista
+  insertArtista,
+  insertArtistaObj,
+  updateArtistaObj
 };

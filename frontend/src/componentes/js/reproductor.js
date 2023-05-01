@@ -5,12 +5,7 @@ function Reproductor ({index}){
         var reproductor = document.getElementById("reproductor"+index);
         return reproductor
     }
-
-    function play(){
-        var reproductor = initRepro();
-        reproductor.play();
-        console.log("PLAY "+reproductor);
-    }
+    
 
     function pause(){
         var reproductor = initRepro();
@@ -26,6 +21,37 @@ function Reproductor ({index}){
         reproductor.currentTime = 0;
         
         console.log("STOP "+reproductor);
+    }
+
+    function getElementsByIdStartsWith(container, selectorTag, prefix) {
+        var items = [];
+        var repro = document.getElementById(container).getElementsByTagName(selectorTag);
+        for (var i = 0; i < repro.length; i++) {
+            if (repro[i].id.lastIndexOf(prefix, 0) === 0) {
+                items.push(repro[i]);
+            }
+        }
+        return items;
+    }
+
+    function stopAllBut(){
+        var reproductores = getElementsByIdStartsWith("lanzamientos", "audio", "reproductor")
+
+        for(var i =0 ;i < reproductores.length;i++){
+            console.log(reproductores[i]);
+            var reproductor = document.getElementById(reproductores[i].id);
+            if(reproductor.id !== initRepro().id){
+                reproductor.pause();
+                reproductor.currentTime = 0;
+            }
+        }
+    }
+
+    function play(){
+        stopAllBut();
+        var reproductor = initRepro();
+        reproductor.play();
+        console.log("PLAY "+reproductor);
     }
 
     return(

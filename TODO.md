@@ -1,10 +1,14 @@
 TODO
-[ ] la edicion/creacion de imagenes en Back
-[ ] parar todos las canciones en Front/Back
-[ ] corregir los avisos de errores
-[X] Audios en Front
 [ ] corregir el alert del envio de mail en Back
+[ ] la edicion/creacion de imagenes en Back
+[ ] API para enviar mails 
+[ ] corregir los avisos de errores
+[ ] Estado de cancion en Back/Front
+[X] corregir el reproductor q no stope la cancion q se esta escuchando
+[X] Audios en Front
 [X] subida de Audios en Back
+[X] parar todos las canciones en Front
+[X] parar todos las canciones en Back
 
 
 
@@ -14,7 +18,7 @@ TODO
 -Lanzamientos
 
 (API REST) TERMINAR FRONT
-API para enviar mails 
+
 [X] corregir css
 
 [X] EXPORTAR SQL

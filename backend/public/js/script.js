@@ -18,8 +18,33 @@ function initRepro(index){
     return reproductor
 }
 
+function getElementsByIdStartsWith(container, selectorTag, prefix) {
+    var items = [];
+    var repro = document.getElementById(container).getElementsByTagName(selectorTag);
+    for (var i = 0; i < repro.length; i++) {
+        if (repro[i].id.lastIndexOf(prefix, 0) === 0) {
+            items.push(repro[i]);
+        }
+    }
+    return items;
+}
+
+function stopAllBut(index){
+    var reproductores = getElementsByIdStartsWith("lanzamientos", "audio", "reproductor")
+
+    for(var i =0 ;i < reproductores.length;i++){
+        console.log(reproductores[i]);
+        var reproductor = document.getElementById(reproductores[i].id);
+        if(reproductor.id !== initRepro(index).id){
+            reproductor.pause();
+            reproductor.currentTime = 0;
+        }
+    }
+}
+
 function play(index){
     var reproductor = initRepro(index);
+    stopAllBut(index);
     reproductor.play();
     console.log("PLAY "+reproductor);
 }

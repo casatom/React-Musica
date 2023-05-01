@@ -6,11 +6,6 @@ const LanzamientoItem = (props) => {
 
   const reproductor = "reproductor"+ id;
   
-  /*
-  const play = "play("+ id + ")";
-  const pause = "pause("+ id + ")";
-  const stop = "stop("+ id + ")";
-  */
 
   return (
     <li>

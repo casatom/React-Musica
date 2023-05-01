@@ -3,7 +3,7 @@ TODO
 [X] la edicion/creacion de imagenes en Back
 [ ] API para enviar mails 
 [ ] corregir los avisos de errores
-[ ] Estado de cancion en Back/Front
+[ ] Estado de cancion en (Back)/Front
 [X] corregir el reproductor q no stope la cancion q se esta escuchando
 [X] Audios en Front
 [X] subida de Audios en Back

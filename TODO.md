@@ -1,7 +1,7 @@
 TODO
 [X] corregir el alert del envio de mail en Back
 [X] la edicion/creacion de imagenes en Back
-[ ] API para enviar mails 
+[X] API para enviar mails 
 [ ] corregir los avisos de errores
 [ ] Estado de cancion en (Back)/Front
 [X] corregir el reproductor q no stope la cancion q se esta escuchando

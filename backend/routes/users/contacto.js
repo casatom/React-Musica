@@ -21,7 +21,6 @@ router.post('/', async(req, res, next)=> {
     var resultado = await mailsModel.insertMails(nombre,	texto,	emailEmisor);
 
     if (resultado) {
-      //alert('se envio un mensaje al administrador')
       res.render('users/contacto',{
         layout: 'users/layout',
         nombre: req.session.nombre,
@@ -29,7 +28,6 @@ router.post('/', async(req, res, next)=> {
         envioCorrecto:1
       });
     } else {
-      //alert('ocurrio un error al guardar su mensaje')
       res.render('users/contacto',{
         layout: 'users/layout',
         nombre: req.session.nombre,
@@ -39,7 +37,6 @@ router.post('/', async(req, res, next)=> {
     }
   } catch (error) {
     console.log(error);
-    //alert('ocurrio un error al enviar su mensaje')
     res.render('users/contacto',{
       layout: 'users/layout',
       nombre: req.session.nombre,

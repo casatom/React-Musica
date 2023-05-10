@@ -40,7 +40,20 @@
           </p>
         </div>
 
-        <a href="#" class="btn-escuchar">Escuchar</a>
+        <audio hidden id="reproductor{{@index}}" controls>
+					<source src="{{this.audio}}" />
+        </audio>
+
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <!-- Agrega los botones de control -->
+            <button id="btnPlay{{@index}}" onclick="play({{@index}})" class="btn btn-primary mr-2">Play</button>
+            <button id="btnPause{{@index}}" onclick="pause({{@index}})" class="btn btn-secondary mr-2">Pause</button>
+            <button id="btnStop{{@index}}" onclick="stop({{@index}})" class="btn btn-danger mr-2">Stop</button>
+          </div>
+        </div>
+
+        <br>
 
         <form action="/admin/lanzamientos/editable" method="post" style="all:unset">
           <button

@@ -5,12 +5,16 @@ var generosModel = require('./../../models/generosModel');
 var artistasModel = require('./../../models/artistasModel');
 var mapeadorImagenes = require('./../../models/mappearImagenes');
 var uploader = require('./../../models/uploader');
+var uploaderAudio = require('./../../models/uploaderAudio');
+var mapeadorAudios = require('./../../models/mappearAudios');
 
 router.get('/', async(req, res, next) =>  {
 
   var resultados = await lanzamientoModel.getAllLanzamientos();
 
-  resultados = mapeadorImagenes.mapeo(resultados)
+  resultados = mapeadorImagenes.mapeo(resultados);
+
+  resultados = mapeadorAudios.mapeo(resultados);
 
   res.render('admin/lanzamientos',{
     layout: 'admin/layout',
@@ -52,20 +56,34 @@ router.post("/alta", async (req, res, next) => {
   console.log("ruta "+ rutaImagen);
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
-  var resultado;
+  var resultado =false;
 
-  if(nombre!=undefined && descripcion!=undefined && nombre!=undefined && artistaId!=undefined && generoId!=undefined ){
-    resultado = await lanzamientoModel.insertLanzamiento(
-      nombre,
-      descripcion,
-      artistaId,
-      generoId,
-      await uploader.subir(req.files)
-    );
+
+  var lan = {
+    nombre: nombre,
+    descripcion: descripcion,
+    artistaId: artistaId,
+    generoId: generoId
   }
-  else{
-    resultado = false;
+
+  
+  if(nombre!=="" && descripcion!=="" && artistaId!=="undefined" && generoId !== "undefined" ){
+    if(req.files){
+      if(Object.keys(req.files).includes('rutaImagen')){
+        var imagen = await uploader.subir(req.files);
+        lan["rutaImagen"] = imagen;
+      }
+      if(Object.keys(req.files).includes('rutaAudio')){
+        var audio = await uploaderAudio.subir(req.files);
+        lan["rutaAudio"] = audio;
+      }
+    }
+  
+    resultado = await lanzamientoModel.insertLanzamientoObj(lan);
+  
   }
+  // req.files && Object.keys(req.files).length > 0
+  
 
   console.log("resultado : "+resultado)
 
@@ -96,6 +114,7 @@ router.post("/editable", async (req, res, next) => {
   var resultado = await lanzamientoModel.getLanzamiento(id);
 
   resultado = mapeadorImagenes.mapeoUnico(resultado);
+  resultado = mapeadorAudios.mapeoUnico(resultado);
 
   if (resultado) {
     res.render("admin/editarLanzamiento", {
@@ -121,7 +140,8 @@ router.post("/editar", async (req, res, next) => {
   var id = req.body.lanzamientoId; 
   var nombre = req.body.nombre;
   var descripcion = req.body.descripcion;
-  var rutaImagen = req.body.rutaImagenAnterior;
+  var rutaImagenAnterior = req.body.rutaImagenAnterior;
+  var rutaAudioAnterior = req.body.rutaAudioAnterior;
   var artistaId = req.body.artistaIdEditado;
   var generoId = req.body.generoIdEditado;
 
@@ -130,24 +150,54 @@ router.post("/editar", async (req, res, next) => {
   console.log("Id a editar: " + id);
   console.log("nombre " + nombre);
   console.log("descripcion " + descripcion);
-  console.log("ruta "+ rutaImagen);
   console.log("artistaId "+ artistaId);
   console.log("generoId "+ generoId);
 
+  
   /**
    * 
    * generoId,	nombre,	descripcion,	
-  rutaImagen = "rock.jpg"
+  rutaImagen 
    */
+  var resultado =false;
 
-  var resultado = await lanzamientoModel.updateLanzamiento(id,nombre,descripcion,artistaId,generoId,
-    await uploader.modificar(req.files,rutaImagen));
+  var lan = {
+    nombre: nombre,
+    descripcion: descripcion,
+    artistaId: artistaId,
+    generoId: generoId
+  }
+
+  if(nombre!=="" && descripcion!=="" && artistaId!==undefined && generoId !== undefined ){
+    // req.files && Object.keys(req.files).length > 0
+    if(req.files){
+        
+      console.log("--Files--")
+      console.log("file keys "+  Object.keys(req.files))
+        
+      console.log("--Body--")
+      if(Object.keys(req.files).includes('rutaImagen')){
+        console.log("rutaImagenAnterior "+ rutaImagenAnterior)
+        var imagen = await uploader.modificar(req.files,rutaImagenAnterior);
+        lan["rutaImagen"] = imagen;
+        console.log("rutaImagen "+ imagen);
+      }
+      if(Object.keys(req.files).includes('rutaAudio')){
+        console.log("rutaAudioAnterior "+rutaAudioAnterior)
+        var audio = await uploaderAudio.modificar(req.files, rutaAudioAnterior);
+        lan["rutaAudio"] = audio;
+        console.log("rutaAudio "+audio)
+      }
+    }
+    resultado = await lanzamientoModel.updateLanzamientoObj(id,lan);
+  }
 
 
   if(resultado){
     res.redirect("/admin/lanzamientos");
   }
   else{
+    //TODO enviar el error
     res.redirect("/admin/lanzamientos");
   }  
 });
@@ -164,7 +214,9 @@ router.post("/borrar", async (req, res, next) => {
 
   var resultado = await lanzamientoModel.deleteLanzamiento(id);
 
-  await uploader.borrar(lanzamientoBorrado.rutaImagen)
+  await uploader.borrar(lanzamientoBorrado.rutaImagen);
+
+  await uploaderAudio.borrar(lanzamientoBorrado.rutaAudio)
 
   console.log(resultado);
 

@@ -51,9 +51,16 @@
   </div>
 
   <div class="mb-3">
+
+    <label for="formFile" class="form-label">Cargar canción...</label>
+    <input class="form-control" type="file" name="rutaAudio" accept="audio/*"/>
+
+  </div>
+
+  <div class="mb-3">
     <label for="formFile" class="form-label">Cargar imagen...</label>
     <input class="form-control" type="file" name="rutaImagen" 
-     id="imagen" onchange="previewImage();" accept="image/*" value="{{lanzamiento.rutaImagen}}" />
+     id="imagen" onchange="previewImage();" accept="image/*"  />
     <br><br>
     <h2 >Imagen Anterior...</h2>
     <br><br>
@@ -62,6 +69,7 @@
     <h2>Previsualizacion...</h2>
     <br><br>
     <img id="preview">
+    <input hidden name="rutaAudioAnterior" value="{{lanzamiento.rutaAudio}}"></p>
     <input hidden name="rutaImagenAnterior" value="{{lanzamiento.rutaImagen}}"></p>
   </div>
   <button

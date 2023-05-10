@@ -7,7 +7,7 @@ const Header = (props) => {
             <div>
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     <div className="holder">
-                        <img src="img/logo.png" width="100" alt="Meta-icon" />
+                        <img src="logo.png" width="100" alt="Meta-icon" />
                         <h1 className='home'>Mesa.com</h1>
                     </div>
                 </Link>

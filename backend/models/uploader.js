@@ -7,7 +7,8 @@ async function subir(files){
   var rutaImagen='';
   if(files && Object.keys(files).length > 0){
     imagen = files.rutaImagen;
-    rutaImagen = (await uploader(imagen.tempFilePath)).public_id
+    console.log("LA IMAGEN QUE SUBO ES " + imagen.tempFilePath);
+    rutaImagen = (await uploader(imagen.tempFilePath).catch(error => console.log(error))).public_id
   }
 
   return rutaImagen;
@@ -16,24 +17,18 @@ async function subir(files){
 async function modificar(files,rutaImagenAnterior){
     await borrar(rutaImagenAnterior);
 
-
-    var rutaImagen='';
-    if(files && Object.keys(files).length > 0){
-      imagen = files.rutaImagen;
-      rutaImagen = (await uploader(imagen.tempFilePath)).public_id
-    }
-
-    
-
-    return rutaImagen
+    return await subir(files);
 }
 
 async function borrar(rutaImagen){
 
-    if(rutaImagen){
+    if(rutaImagen || rutaImagen ===undefined){
         await (destroy(rutaImagen))
     }
 }
+
+
+
 
 
 

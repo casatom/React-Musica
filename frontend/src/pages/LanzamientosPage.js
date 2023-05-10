@@ -27,11 +27,13 @@ const LanzamientosPage = (props) => {
             lanzamientos.map((item) => (
               <LanzamientoItem
                 key={item.id}
+                id={item.id}
                 nombre={item.nombre}
                 descripcion={item.descripcion}
                 genero = {item.generoNombre}
                 artista = {item.artistaNombre}
                 imagen={item.imagen}
+                audio={item.audio}
                 body={item.cuerpo}
               />
             ))

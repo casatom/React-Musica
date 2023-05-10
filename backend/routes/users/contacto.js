@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mailsModel = require('./../../models/mailsModel')
-//TODO sacar este alert
-//var alert = require('alert')
 
 router.get('/', function(req, res, next) {
   res.render('users/contacto',{

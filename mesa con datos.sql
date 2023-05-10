@@ -27,6 +27,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `artistas`
 --
 
+CREATE DATABASE IF NOT EXISTS `mesa` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
+USE `mesa`;
+
 DROP TABLE IF EXISTS `artistas`;
 CREATE TABLE IF NOT EXISTS `artistas` (
   `id` int NOT NULL AUTO_INCREMENT,
